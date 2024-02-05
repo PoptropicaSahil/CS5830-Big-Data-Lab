@@ -1,5 +1,12 @@
-2024-02-05 15:52:39,194 - SCRIPT RUNNER - INFO - args.data_dir is ./data
-2024-02-05 15:52:39,195 - SCRIPT RUNNER - INFO - args.learning_rate is 0.997
-2024-02-05 15:52:39,195 - SCRIPT RUNNER - INFO - Existing data found at ./data
-2024-02-05 15:52:39,253 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully.
-2024-02-05 15:52:50,097 - VARIBLE CHECKS - DEBUG - image and labels are [(<class 'torch.Tensor'>, <class 'int'>), (<class 'torch.Tensor'>, <class 'int'>), (<class 'torch.Tensor'>, <class 'int'>)]
+2024-02-05 23:07:19,387 - SCRIPT RUNNER - INFO - args.data_dir is ./data
+2024-02-05 23:07:19,387 - SCRIPT RUNNER - INFO - args.learning_rate is 1e-05
+2024-02-05 23:07:19,387 - SCRIPT RUNNER - INFO - args.epochs is 5
+2024-02-05 23:07:19,387 - SCRIPT RUNNER - INFO - Existing data found at ./data
+2024-02-05 23:07:19,455 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully.
+2024-02-05 23:07:19,455 - SCRIPT RUNNER - INFO - Size of train data: 60000, test data: 10000
+2024-02-05 23:07:19,457 - VARIBLE CHECKS - DEBUG - image and label are of types (<class 'torch.Tensor'>, <class 'int'>)
+2024-02-05 23:07:19,457 - VARIBLE CHECKS - DEBUG - image size is torch.Size([1, 28, 28])
+2024-02-05 23:08:43,618 - VARIBLE CHECKS - DEBUG - updated dataset len = 360000, type = <class 'list'>
+2024-02-05 23:08:48,815 - SCRIPT RUNNER - INFO - Oversampled train data, size = 360000
+2024-02-05 23:09:02,049 - VARIBLE CHECKS - DEBUG - updated dataset len = 60000, type = <class 'list'>
+2024-02-05 23:09:02,694 - SCRIPT RUNNER - INFO - Oversampled test data, size = 60000

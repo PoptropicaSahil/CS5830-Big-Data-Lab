@@ -1,8 +1,9 @@
 import os
-import torch
-from torchvision import datasets, transforms
+import numpy as np
 import matplotlib.pyplot as plt
 
+import torch
+from torchvision import datasets, transforms
 from utils.logging_config import script_run_logger
 
 
@@ -57,7 +58,7 @@ class load_mnist_data:
         )
         return train_dataset, test_dataset
 
-    def plot_images(self, dataset, num_images=3):
+    def plot_images_from_dataloader(self, dataset, num_images=3):
         data_loader = torch.utils.data.DataLoader(  # type: ignore
             dataset, batch_size=num_images, shuffle=True
         )
@@ -75,3 +76,10 @@ class load_mnist_data:
         script_run_logger.info("Showing sample data points")
 
         return
+
+
+    def task1_rotate_image(self, image, angle):
+        # Rotate the image by the specified angle
+        rotated_image = image.rotate(angle)
+
+        return np.array(rotated_image)
