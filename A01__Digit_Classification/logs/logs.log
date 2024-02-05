@@ -1,0 +1,5 @@
+2024-02-05 15:52:39,194 - SCRIPT RUNNER - INFO - args.data_dir is ./data
+2024-02-05 15:52:39,195 - SCRIPT RUNNER - INFO - args.learning_rate is 0.997
+2024-02-05 15:52:39,195 - SCRIPT RUNNER - INFO - Existing data found at ./data
+2024-02-05 15:52:39,253 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully.
+2024-02-05 15:52:50,097 - VARIBLE CHECKS - DEBUG - image and labels are [(<class 'torch.Tensor'>, <class 'int'>), (<class 'torch.Tensor'>, <class 'int'>), (<class 'torch.Tensor'>, <class 'int'>)]
