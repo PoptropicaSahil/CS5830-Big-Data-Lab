@@ -1,0 +1,9 @@
+# dataset
+*-ubyte
+
+# venv
+venv
+
+# extra data
+*.gz
+*.pyc
