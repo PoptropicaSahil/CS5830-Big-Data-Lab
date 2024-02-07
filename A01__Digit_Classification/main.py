@@ -24,9 +24,6 @@ def main():
     parser = argparse.ArgumentParser(
         description="Load MNIST dataset and train a classifier"
     )
-    parser.add_argument(
-        "--data_dir", type=str, default="./data", help="Path to load MNIST dataset"
-    )
 
     parser.add_argument(
         "--oversample_rate",
@@ -37,13 +34,13 @@ def main():
 
     args = parser.parse_args()
 
+    # Input checks for argument
     if not 0 < args.oversample_rate < 100:
         raise argparse.ArgumentTypeError("oversample_rate is out of bounds")
 
-    script_run_logger.info(f"args.data_dir is {args.data_dir}")
-
     # Load datasets
-    train_data, test_data = get_datasets(save_path=args.data_dir)
+    data_dir = "./data"
+    train_data, test_data = get_datasets(save_path=data_dir)
     script_run_logger.info("MNIST dataset loaded successfully")
 
     # Convert dataset to the format used in the experiments below
@@ -106,21 +103,22 @@ def main():
     ### TASK 3 and 4 ###
     script_run_logger.info("Check training log file for training logs")
 
+    threshold = 0.15
     # Start with 0 degrees and ground truth of 10 degrees
     script_run_logger.warning("Training on set of 0 degrees rotation")
     model = train_and_tune_model(dataset=train_data_0)
     script_run_logger.warning("Checking performance on holdout set of 0 degrees")
-    flag = monitor_perf(model, holdout_set_0, threshold=0.30)
+    flag = monitor_perf(model, holdout_set_0, threshold=threshold)
     train_data_0_10 = generate_dataset_by_angle(train_data, angle_value=[0, 10])
     test_data_0_10 = generate_dataset_by_angle(test_data, angle_value=[0, 10])
     holdout_set_10 = generate_dataset_by_angle(holdout_set, angle_value=[10])
     script_run_logger.warning("Checking performance on holdout set of 10 degrees")
-    flag = monitor_perf(model, holdout_set_10, threshold=0.30)
+    flag = monitor_perf(model, holdout_set_10, threshold=threshold)
 
     script_run_logger.warning("Training on set of 0 and 10 degrees")
     model = train_and_tune_model(dataset=train_data_0_10)
     script_run_logger.warning("Checking performance on holdout set of 10 degrees")
-    flag = monitor_perf(model, holdout_set_10, threshold=0.30)
+    flag = monitor_perf(model, holdout_set_10, threshold=threshold)
 
     # Ground truth of -30 degrees
     train_data_0_10_n30 = generate_dataset_by_angle(
@@ -129,7 +127,7 @@ def main():
     test_data_0_10_n30 = generate_dataset_by_angle(test_data, angle_value=[0, 10, -30])
     holdout_set_n30 = generate_dataset_by_angle(holdout_set, angle_value=[-30])
     script_run_logger.warning("Checking performance on holdout set of -30 degrees")
-    flag = monitor_perf(model, holdout_set_n30, threshold=0.30)
+    flag = monitor_perf(model, holdout_set_n30, threshold=threshold)
 
     script_run_logger.warning("Training on set of 0 and 10 and -30 degrees")
     model = train_and_tune_model(dataset=train_data_0_10_n30)
@@ -137,18 +135,18 @@ def main():
     script_run_logger.warning(
         "Checking performance on holdout set of 0 and 10 and -30 degrees"
     )
-    flag = monitor_perf(model, holdout_set_n30, threshold=0.30)
+    flag = monitor_perf(model, holdout_set_n30, threshold=threshold)
 
     # Ground truth of 20 degrees
     holdout_set_20 = generate_dataset_by_angle(holdout_set, angle_value=[20])
     script_run_logger.warning("Checking performance on holdout set of 20 degrees")
-    flag = monitor_perf(model, holdout_set_20, threshold=0.30)
+    flag = monitor_perf(model, holdout_set_20, threshold=threshold)
 
     # Train on full dataset
     script_run_logger.warning("Training on full train set")
     model = train_and_tune_model(dataset=train_data)
     script_run_logger.warning("Checking performance on full holdout set")
-    flag = monitor_perf(model, holdout_set, threshold=0.30)
+    flag = monitor_perf(model, holdout_set, threshold=threshold)
 
     script_run_logger.info("Generating performance metrics")
     generate_performance_metrics(model, holdout_set)
