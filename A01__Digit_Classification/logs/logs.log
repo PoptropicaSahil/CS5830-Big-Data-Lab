@@ -1,36 +1,181 @@
-2024-02-07 23:41:18,977 - SCRIPT RUNNER - INFO - args.data_dir is ./data
-2024-02-07 23:41:18,977 - SCRIPT RUNNER - INFO - Existing data found at ./data
-2024-02-07 23:41:19,038 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully
-2024-02-07 23:41:19,038 - SCRIPT RUNNER - WARNING - images SHAPE = torch.Size([60000, 28, 28])
-2024-02-07 23:41:19,038 - SCRIPT RUNNER - WARNING - images SHAPE in MAIN GEN DATA TUPLE = torch.Size([60000, 28, 28])
-2024-02-07 23:41:19,038 - SCRIPT RUNNER - WARNING - images SHAPE = torch.Size([10000, 28, 28])
-2024-02-07 23:41:19,038 - SCRIPT RUNNER - INFO - converted data to tuple form
-2024-02-07 23:41:19,038 - SCRIPT RUNNER - INFO - Existing metrics directory found, clearing contents ./plots/
-2024-02-07 23:41:20,897 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
-2024-02-07 23:41:20,898 - SCRIPT RUNNER - INFO - Size of train data: 60000, test data: 10000
-2024-02-07 23:41:22,355 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
-2024-02-07 23:41:23,917 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
-2024-02-07 23:41:40,456 - VARIBLE CHECKS - DEBUG - Updated oversampled dataset size = 60000)
-2024-02-07 23:41:42,759 - VARIBLE CHECKS - DEBUG - Updated oversampled dataset size = 10000)
-2024-02-07 23:41:42,771 - SCRIPT RUNNER - INFO - Oversampled train data, size = 60000
-2024-02-07 23:41:42,772 - SCRIPT RUNNER - INFO - Oversampled test data, size = 10000
-2024-02-07 23:41:42,772 - SCRIPT RUNNER - WARNING - images SHAPE in MAIN GEN OVERSAMPLED = torch.Size([60000, 1, 28, 28])
-2024-02-07 23:41:42,772 - VARIBLE CHECKS - DEBUG - type(images) = <class 'torch.Tensor'> targets = <class 'list'> angles = <class 'list'>
-2024-02-07 23:41:42,772 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([60000, 1, 28, 28])
-2024-02-07 23:41:42,845 - VARIBLE CHECKS - DEBUG - shape images_sample= torch.Size([5000, 1, 28, 28]), len targets_sample = 5000
-2024-02-07 23:41:42,847 - SCRIPT RUNNER - INFO - Updated holdout data size = 5000
-2024-02-07 23:41:42,847 - SCRIPT RUNNER - INFO - Updated train data size = 55000
-2024-02-07 23:41:42,859 - SCRIPT RUNNER - INFO - Updated 0 degrees train data size = torch.Size([7747, 1, 28, 28])
-2024-02-07 23:41:42,859 - SCRIPT RUNNER - INFO - Check training log file for training logs
-2024-02-07 23:41:42,859 - SCRIPT RUNNER - WARNING - Training on set of 0 degrees rotation
-2024-02-07 23:41:42,900 - SCRIPT RUNNER - INFO - Training on full train set
-2024-02-07 23:41:42,900 - SCRIPT RUNNER - INFO - Fetched best model in main script
-2024-02-07 23:41:42,900 - SCRIPT RUNNER - INFO - Checking performance on full holdout set
-2024-02-07 23:41:43,023 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/40 (0.00%)]
-2024-02-07 23:41:44,634 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.1535, Accuracy: 4817/5000 (96.34%)
+2024-02-08 00:16:02,212 - SCRIPT RUNNER - INFO - args.data_dir is ./data
+2024-02-08 00:16:02,212 - SCRIPT RUNNER - INFO - Existing data found at ./data
+2024-02-08 00:16:02,257 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully
+2024-02-08 00:16:02,258 - SCRIPT RUNNER - INFO - Converted data to tuple form
+2024-02-08 00:16:02,258 - SCRIPT RUNNER - INFO - Existing metrics directory found, clearing contents ./plots/
+2024-02-08 00:16:04,164 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
+2024-02-08 00:16:04,174 - SCRIPT RUNNER - INFO - Size of train data: 60000, test data: 10000
+2024-02-08 00:16:05,414 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
+2024-02-08 00:16:06,541 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
+2024-02-08 00:18:06,083 - VARIBLE CHECKS - DEBUG - Updated oversampled dataset size = 420000)
+2024-02-08 00:18:23,363 - VARIBLE CHECKS - DEBUG - Updated oversampled dataset size = 70000)
+2024-02-08 00:18:23,474 - SCRIPT RUNNER - INFO - Oversampled train data, size = 420000
+2024-02-08 00:18:23,474 - SCRIPT RUNNER - INFO - Oversampled test data, size = 70000
+2024-02-08 00:18:23,474 - VARIBLE CHECKS - DEBUG - type(images) = <class 'torch.Tensor'> targets = <class 'list'> angles = <class 'list'>
+2024-02-08 00:18:23,474 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([420000, 1, 28, 28])
+2024-02-08 00:18:23,857 - VARIBLE CHECKS - DEBUG - shape images_sample= torch.Size([5000, 1, 28, 28]), len targets_sample = 5000
+2024-02-08 00:18:23,857 - SCRIPT RUNNER - INFO - Updated holdout data size = 5000
+2024-02-08 00:18:23,857 - SCRIPT RUNNER - INFO - Updated train data size = 415000
+2024-02-08 00:18:23,957 - SCRIPT RUNNER - INFO - Check training log file for training logs
+2024-02-08 00:18:23,957 - SCRIPT RUNNER - WARNING - Training on set of 0 degrees rotation
+2024-02-08 00:18:24,814 - SCRIPT RUNNER - INFO - Existing directory found, clearing contents ./trained_models/
+2024-02-08 00:18:24,846 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 1 linear layers ===
+2024-02-08 00:18:24,850 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:18:45,456 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1667, Accuracy: 28556/29636 (96.36%)
+2024-02-08 00:18:45,457 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:19:07,196 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1043, Accuracy: 28961/29635 (97.73%)
+2024-02-08 00:19:07,216 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
 
-2024-02-07 23:41:44,634 - SCRIPT RUNNER - WARNING - Test loss (0.1535) is lower than threshold 0.3!
-2024-02-07 23:41:44,642 - SCRIPT RUNNER - INFO - Got flag value 0
-2024-02-07 23:41:44,642 - SCRIPT RUNNER - INFO - Generating performance metrics
-2024-02-07 23:41:44,642 - SCRIPT RUNNER - INFO - Existing metrics directory found, clearing contents ./performance_metrics/
-2024-02-07 23:41:46,788 - SCRIPT RUNNER - INFO - show_model_predictions
+2024-02-08 00:19:07,228 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 2 linear layers ===
+2024-02-08 00:19:07,228 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:19:30,138 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.2300, Accuracy: 28190/29636 (95.12%)
+2024-02-08 00:19:30,139 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:19:48,573 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1084, Accuracy: 28895/29635 (97.50%)
+2024-02-08 00:19:48,589 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:19:48,604 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 1 linear layers ===
+2024-02-08 00:19:48,604 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:20:31,886 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1580, Accuracy: 28589/29636 (96.47%)
+2024-02-08 00:20:31,888 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:21:21,966 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1129, Accuracy: 28830/29635 (97.28%)
+2024-02-08 00:21:21,989 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:21:21,989 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 2 linear layers ===
+2024-02-08 00:21:22,005 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:22:04,301 - SCRIPT RUNNER - INFO - Test set: Average loss: 4.4728, Accuracy: 6612/29636 (22.31%)
+2024-02-08 00:22:04,301 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:22:48,764 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1700, Accuracy: 28382/29635 (95.77%)
+2024-02-08 00:22:48,779 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:22:48,779 - SCRIPT RUNNER - INFO - Fetched best model config: num_conv_layers = 1, num_linear_layers = 1
+2024-02-08 00:22:48,813 - SCRIPT RUNNER - WARNING - Checking performance on holdout set of 0 degrees
+2024-02-08 00:22:48,850 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/6 (0.00%)]
+2024-02-08 00:22:48,979 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.1291, Accuracy: 682/703 (97.01%)
+
+2024-02-08 00:22:48,979 - SCRIPT RUNNER - WARNING - Test loss (0.1291) is lower than threshold 0.15!
+2024-02-08 00:22:49,231 - SCRIPT RUNNER - WARNING - Checking performance on holdout set of 10 degrees
+2024-02-08 00:22:49,275 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/6 (0.00%)]
+2024-02-08 00:22:49,460 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.1941, Accuracy: 649/683 (95.02%)
+
+2024-02-08 00:22:49,460 - SCRIPT RUNNER - WARNING - Test loss (0.1941) is higher than threshold 0.15!
+2024-02-08 00:22:49,461 - SCRIPT RUNNER - WARNING - Training on set of 0 and 10 degrees
+2024-02-08 00:22:50,322 - SCRIPT RUNNER - INFO - Existing directory found, clearing contents ./trained_models/
+2024-02-08 00:22:50,335 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 1 linear layers ===
+2024-02-08 00:22:50,337 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:23:41,090 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1289, Accuracy: 57327/59091 (97.01%)
+2024-02-08 00:23:41,092 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:24:29,901 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0822, Accuracy: 57923/59091 (98.02%)
+2024-02-08 00:24:29,909 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:24:29,923 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 2 linear layers ===
+2024-02-08 00:24:29,932 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:25:14,143 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1401, Accuracy: 57059/59091 (96.56%)
+2024-02-08 00:25:14,145 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:25:53,816 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0772, Accuracy: 57929/59091 (98.03%)
+2024-02-08 00:25:53,832 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:25:53,848 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 1 linear layers ===
+2024-02-08 00:25:53,848 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:27:15,997 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1008, Accuracy: 57687/59091 (97.62%)
+2024-02-08 00:27:16,001 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:28:43,704 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0613, Accuracy: 58319/59091 (98.69%)
+2024-02-08 00:28:43,728 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:28:43,740 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 2 linear layers ===
+2024-02-08 00:28:43,749 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:30:15,103 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1044, Accuracy: 57658/59091 (97.57%)
+2024-02-08 00:30:15,103 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:32:00,976 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0608, Accuracy: 58191/59091 (98.48%)
+2024-02-08 00:32:00,992 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:32:00,992 - SCRIPT RUNNER - INFO - Fetched best model config: num_conv_layers = 2, num_linear_layers = 2
+2024-02-08 00:32:01,020 - SCRIPT RUNNER - WARNING - Checking performance on holdout set of 10 degrees
+2024-02-08 00:32:01,072 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/6 (0.00%)]
+2024-02-08 00:32:01,277 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.0746, Accuracy: 671/683 (98.24%)
+
+2024-02-08 00:32:01,277 - SCRIPT RUNNER - WARNING - Test loss (0.0746) is lower than threshold 0.15!
+2024-02-08 00:32:01,553 - SCRIPT RUNNER - WARNING - Checking performance on holdout set of -30 degrees
+2024-02-08 00:32:01,609 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/6 (0.00%)]
+2024-02-08 00:32:01,828 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 1.0613, Accuracy: 469/703 (66.71%)
+
+2024-02-08 00:32:01,828 - SCRIPT RUNNER - WARNING - Test loss (1.0613) is higher than threshold 0.15!
+2024-02-08 00:32:01,828 - SCRIPT RUNNER - WARNING - Training on set of 0 and 10 and -30 degrees
+2024-02-08 00:32:04,226 - SCRIPT RUNNER - INFO - Existing directory found, clearing contents ./trained_models/
+2024-02-08 00:32:04,229 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 1 linear layers ===
+2024-02-08 00:32:04,252 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:33:07,331 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1316, Accuracy: 85596/88537 (96.68%)
+2024-02-08 00:33:07,334 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:34:10,530 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0889, Accuracy: 86486/88537 (97.68%)
+2024-02-08 00:34:10,561 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:34:10,577 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 2 linear layers ===
+2024-02-08 00:34:10,593 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:35:12,095 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1400, Accuracy: 85200/88537 (96.23%)
+2024-02-08 00:35:12,095 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:36:18,442 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0904, Accuracy: 86262/88537 (97.43%)
+2024-02-08 00:36:18,442 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:36:18,461 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 1 linear layers ===
+2024-02-08 00:36:18,476 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:38:22,909 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1113, Accuracy: 86053/88537 (97.19%)
+2024-02-08 00:38:22,913 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:40:36,094 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0715, Accuracy: 86892/88537 (98.14%)
+2024-02-08 00:40:36,110 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:40:36,125 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 2 linear layers ===
+2024-02-08 00:40:36,141 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:42:50,584 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1072, Accuracy: 86044/88537 (97.18%)
+2024-02-08 00:42:50,584 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:45:03,159 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0679, Accuracy: 86841/88537 (98.08%)
+2024-02-08 00:45:03,176 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:45:03,176 - SCRIPT RUNNER - INFO - Fetched best model config: num_conv_layers = 2, num_linear_layers = 2
+2024-02-08 00:45:03,242 - SCRIPT RUNNER - WARNING - Checking performance on holdout set of 0 and 10 and -30 degrees
+2024-02-08 00:45:03,642 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/6 (0.00%)]
+2024-02-08 00:45:03,894 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.0887, Accuracy: 685/703 (97.44%)
+
+2024-02-08 00:45:03,894 - SCRIPT RUNNER - WARNING - Test loss (0.0887) is lower than threshold 0.15!
+2024-02-08 00:45:03,961 - SCRIPT RUNNER - WARNING - Checking performance on holdout set of 20 degrees
+2024-02-08 00:45:04,058 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/6 (0.00%)]
+2024-02-08 00:45:04,373 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.2349, Accuracy: 634/686 (92.42%)
+
+2024-02-08 00:45:04,373 - SCRIPT RUNNER - WARNING - Test loss (0.2349) is lower than threshold 0.15!
+2024-02-08 00:45:04,373 - SCRIPT RUNNER - WARNING - Training on full train set
+2024-02-08 00:45:10,005 - SCRIPT RUNNER - INFO - Existing directory found, clearing contents ./trained_models/
+2024-02-08 00:45:10,023 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 1 linear layers ===
+2024-02-08 00:45:10,039 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:47:44,337 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1121, Accuracy: 201015/207500 (96.87%)
+2024-02-08 00:47:44,387 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:50:17,983 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0771, Accuracy: 202901/207500 (97.78%)
+2024-02-08 00:50:18,036 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:50:18,098 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 2 linear layers ===
+2024-02-08 00:50:18,148 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 00:52:55,661 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.1121, Accuracy: 200620/207500 (96.68%)
+2024-02-08 00:52:55,695 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 00:55:28,271 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0732, Accuracy: 202932/207500 (97.80%)
+2024-02-08 00:55:28,302 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 00:55:28,336 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 1 linear layers ===
+2024-02-08 00:55:28,367 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 01:01:30,738 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0950, Accuracy: 201893/207500 (97.30%)
+2024-02-08 01:01:30,782 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 01:08:19,764 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0587, Accuracy: 204183/207500 (98.40%)
+2024-02-08 01:08:19,806 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 01:08:19,835 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 2 linear layers ===
+2024-02-08 01:08:19,910 - SCRIPT RUNNER - INFO - Training fold 1:
+2024-02-08 01:14:23,724 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0807, Accuracy: 202677/207500 (97.68%)
+2024-02-08 01:14:23,739 - SCRIPT RUNNER - INFO - Training fold 2:
+2024-02-08 01:20:22,508 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.0651, Accuracy: 203514/207500 (98.08%)
+2024-02-08 01:20:22,521 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+
+2024-02-08 01:20:22,522 - SCRIPT RUNNER - INFO - Fetched best model config: num_conv_layers = 2, num_linear_layers = 1
+2024-02-08 01:20:22,632 - SCRIPT RUNNER - WARNING - Checking performance on full holdout set
+2024-02-08 01:20:23,435 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/40 (0.00%)]
+2024-02-08 01:20:25,713 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.0608, Accuracy: 4911/5000 (98.22%)
+
+2024-02-08 01:20:25,713 - SCRIPT RUNNER - WARNING - Test loss (0.0608) is lower than threshold 0.15!
+2024-02-08 01:20:25,713 - SCRIPT RUNNER - INFO - Generating performance metrics
+2024-02-08 01:20:25,722 - SCRIPT RUNNER - INFO - Existing metrics directory found, clearing contents ./performance_metrics/
+2024-02-08 01:20:28,664 - SCRIPT RUNNER - INFO - show_model_predictions
