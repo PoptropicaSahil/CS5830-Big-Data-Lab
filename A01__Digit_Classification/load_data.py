@@ -56,30 +56,24 @@ class load_mnist_data:
         test_dataset = datasets.MNIST(
             root=self.save_path, train=False, download=True, transform=transform
         )
+
         return train_dataset, test_dataset
 
-    def plot_images_from_dataloader(self, dataset, num_images=3):
-        data_loader = torch.utils.data.DataLoader(  # type: ignore
-            dataset, batch_size=num_images, shuffle=True
-        )
-        images, labels = next(iter(data_loader))
+    # def plot_images_from_dataloader(self, dataset, num_images=3):
+    #     data_loader = torch.utils.data.DataLoader(  # type: ignore
+    #         dataset, batch_size=num_images, shuffle=True
+    #     )
+    #     images, labels = next(iter(data_loader))
 
-        fig, axes = plt.subplots(1, num_images, figsize=(12, 3))
-        plt.title("Few training samples")
-        for i in range(num_images):
-            axes[i].imshow(images[i].numpy().squeeze(), cmap="gray")
-            axes[i].set_title(f"Label: {labels[i]}")
-            axes[i].axis("off")
+    #     fig, axes = plt.subplots(1, num_images, figsize=(12, 3))
+    #     plt.title("Few training samples")
+    #     for i in range(num_images):
+    #         axes[i].imshow(images[i].numpy().squeeze(), cmap="gray")
+    #         axes[i].set_title(f"Label: {labels[i]}")
+    #         axes[i].axis("off")
 
-        plt.show()
+    #     plt.show()
 
-        script_run_logger.info("Showing sample data points")
+    #     script_run_logger.info("Showing sample data points")
 
-        return
-
-
-    def task1_rotate_image(self, image, angle):
-        # Rotate the image by the specified angle
-        rotated_image = image.rotate(angle)
-
-        return np.array(rotated_image)
+    #     return

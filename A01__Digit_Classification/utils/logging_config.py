@@ -23,6 +23,7 @@ with open(log_file_name, "w"):
     pass
 
 
+
 # variable checker logger
 var_chk_logger = logging.getLogger("VARIBLE CHECKS")
 var_chk_logger.setLevel(logging.DEBUG)
