@@ -9,7 +9,11 @@ Ensure you are in the same directory as this file and run
 python main.py --oversample_rate (default: 8)
 ```
 
-To run the pytest tests, run `pytest pytests/`. This will run all the files within the pytest directory.
+To run the pytest tests, run 
+```
+pytest pytests/
+```
+This will run all the files within the pytest directory.
 
 
 ## 📊 Reports 📊
