@@ -1,8 +1,8 @@
 import torch
-from grading_tasks.task3_train import CustomDataset
-from utils.logging_config import script_run_logger
-from torch.utils.data import DataLoader
 import torch.nn.functional as F
+from grading_tasks.task3_train import CustomDataset
+from torch.utils.data import DataLoader
+from utils.logging_config import script_run_logger
 
 
 def monitor_perf(model, ground_truth_dataset, threshold=0.12):
@@ -39,13 +39,13 @@ def monitor_perf(model, ground_truth_dataset, threshold=0.12):
 
     test_loss /= len(data_loader)
     script_run_logger.info(
-        f"Ground truth dataset: Average loss: {test_loss:.4f}, Accuracy: {correct}/{total} ({100*correct/total:.0f}%)\n"
+        f"Ground truth dataset: Average loss: {test_loss:.4f}, Accuracy: {correct}/{total} ({100*correct/total:.2f}%)\n"
     )
 
     flag = 0
     if test_loss > threshold:
         script_run_logger.warning(
-            f"Test loss ({test_loss}) is higher than threshold {threshold}"
+            f"Test loss ({test_loss:.4f}) is higher than threshold {threshold}"
         )
         flag = 1
 

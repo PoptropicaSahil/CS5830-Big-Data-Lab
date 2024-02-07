@@ -1,22 +1,21 @@
 # main_script.py
 import argparse
 
+from grading_tasks.task1_rotate_img import rotate
+from grading_tasks.task2_oversample import generate_oversampled_dataset
+from grading_tasks.task3_train import train_and_tune_model
+from grading_tasks.task4_monitoring import monitor_perf
+from utils.data_utils import (
+    generate_data_tuple,
+    generate_dataset_by_angle,
+    generate_dataset_sample,
+    generate_holdout_set,
+    get_datasets,
+    plot_image,
+)
 
 # from train_classifier import train_classifier
 from utils.logging_config import script_run_logger, var_chk_logger
-
-from utils.data_utils import plot_image
-from utils.data_utils import (
-    get_datasets,
-    generate_holdout_set,
-    generate_data_tuple,
-    generate_dataset_sample,
-)
-
-from grading_tasks.task1_rotate_img import rotate
-from grading_tasks.task2_oversample import generate_oversampled_dataset
-from grading_tasks.task3_train import new_train_model
-from grading_tasks.task4_monitoring import monitor_perf
 
 
 def main():
@@ -81,34 +80,76 @@ def main():
 
     script_run_logger.debug(f"using sample of {n_samples} datapoints ")
 
-    oversample_rate = 8
+    oversample_rate = 5
     # change to 8 for 490k images
 
-    updated_train_data = generate_oversampled_dataset(
+    train_data = generate_oversampled_dataset(
         train_data, oversample_rate=oversample_rate
-    )  # [(updated_images, updated_targets, updated_angles)]
-    script_run_logger.info(
-        f"Oversampled train data, size = {len(updated_train_data[0])}"
-    )
+    )  # [(images, targets, angles)]
+    script_run_logger.info(f"Oversampled train data, size = {len(train_data[0])}")
 
-    updated_test_data = generate_oversampled_dataset(
-        test_data, oversample_rate=oversample_rate
-    )
-    script_run_logger.info(f"Oversampled test data, size = {len(updated_test_data[0])}")
+    test_data = generate_oversampled_dataset(test_data, oversample_rate=oversample_rate)
+    script_run_logger.info(f"Oversampled test data, size = {len(test_data[0])}")
 
     holdout_size = 5000
-    holdout_set, updated_train_data = generate_holdout_set(
-        updated_train_data, holdout_size=holdout_size
+    holdout_set, train_data = generate_holdout_set(
+        train_data, holdout_size=holdout_size
     )
     script_run_logger.info(f"Updated holdout data size = {len(holdout_set[0])}")
-    script_run_logger.info(f"Updated train data size = {len(updated_train_data[0])}")
+    script_run_logger.info(f"Updated train data size = {len(train_data[0])}")
 
-    # learn_model(dataset=updated_train_data)
-    model = new_train_model(dataset=updated_train_data)
+    train_data_0 = generate_dataset_by_angle(train_data, angle_value=0)
+    test_data_0 = generate_dataset_by_angle(test_data, angle_value=0)
+    holdout_set_0 = generate_dataset_by_angle(holdout_set, angle_value=0)
+
+    script_run_logger.info(f"Updated angle 0 data size = {train_data_0[0].shape}")
+    script_run_logger.info(
+        f"Updated holdout_set_0 data size = {holdout_set_0[0].shape}"
+    )
+
+    train_data_10 = generate_dataset_by_angle(train_data, angle_value=10)
+    test_data_10 = generate_dataset_by_angle(test_data, angle_value=10)
+    holdout_set_10 = generate_dataset_by_angle(holdout_set, angle_value=10)
+
+    script_run_logger.info(f"Updated angle 10 data size = {train_data_10[0].shape}")
+    script_run_logger.info(
+        f"Updated holdout_set_10 data size = {holdout_set_10[0].shape}"
+    )
+
+    model = train_and_tune_model(dataset=train_data_0)
+
+    # so that not commented out
+    # random_flag = 1
+    # if not random_flag:
+    #     model = train_and_tune_model(dataset=train_data_0)
+
+    ###### shortcut for now ######
+    # import torch
+    # from grading_tasks.task3_train import build_network
+
+    # model = build_network(num_conv_layers=2, num_linear_layers=2)
+    # model_saving_path = "./trained_models/"
+    # model.load_state_dict(torch.load(model_saving_path + "num_conv2_num_lin2"))
+    # ######
     script_run_logger.info("Fetched best model in main script")
 
-    flag = monitor_perf(model, holdout_set, threshold=0.13)
+    flag = monitor_perf(model, holdout_set_0, threshold=0.15)
     script_run_logger.info(f"Got flag value {flag}")
+
+    # train initially with 0 training, 0 eval, 0 ground truth
+    # pass in monitor_perf --> happy
+
+    # pass in monitor_perf with 10 degree ground truth
+    # if flag raised (which it will!)
+    # train with 0, +10 training, 0, +10 eval, 10 ground truth
+
+    # pass in monitor_perf with -30 degree ground truth
+    # if flag raised (which it will!)
+    # train with 0, +10, -30 training, 0, +10, -30 eval, -30 ground truth
+
+    # pass in monitor_perf with +20 degree ground truth
+    # if flag raised (which it will!)
+    # train with 0, +10,+20,+30 -10, -20, -30 (ALL) training, ALL eval, +20 ground truth
 
 
 if __name__ == "__main__":

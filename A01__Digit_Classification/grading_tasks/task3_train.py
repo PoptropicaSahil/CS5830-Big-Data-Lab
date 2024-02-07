@@ -1,19 +1,31 @@
 import os
+import shutil
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from sklearn.model_selection import KFold, train_test_split
-
-import shutil
-import numpy as np
-from utils.logging_config import var_chk_logger, script_run_logger
-from torch.utils.data import Dataset
-
-
 import torch.optim as optim
+from sklearn.model_selection import KFold, train_test_split
+from torch.utils.data import DataLoader, Dataset
+from utils.logging_config import script_run_logger, train_run_logger, var_chk_logger
 
 
-from torch.utils.data import DataLoader
+class CustomDataset(Dataset):
+    def __init__(self, images, targets, angles):
+        self.images = images.type(torch.float32)  # Convert to tensor
+        self.targets = torch.tensor(targets, dtype=torch.float32)  # Convert to tensor
+        self.angles = torch.tensor(angles, dtype=torch.float32)  # Convert to tensor
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, idx):
+        image = self.images[idx]
+        target = self.targets[idx]  # .item()  # Convert tensor to Python int
+        angle = self.angles[idx]  # .item()  # Convert tensor to Python int
+
+        return image, target, angle
 
 
 def build_network(num_conv_layers, num_linear_layers):
@@ -38,24 +50,57 @@ def build_network(num_conv_layers, num_linear_layers):
     return nn.Sequential(*layers)
 
 
-class CustomDataset(Dataset):
-    def __init__(self, images, targets, angles):
-        self.images = images.type(torch.float32)  # Convert to tensor
-        self.targets = torch.tensor(targets, dtype=torch.float32)  # Convert to tensor
-        self.angles = torch.tensor(angles, dtype=torch.float32)  # Convert to tensor
+def train_loop(train_loader, optimizer, model):
+    model.train()
+    for batch_idx, (data, target, angle) in enumerate(train_loader):
+        data, target, _ = data, target, angle
+        # var_chk_logger.debug(f"data shape = {data.shape}, target shape = {target.shape}")
+        optimizer.zero_grad()
+        output = model(data)
+        # pred = output.argmax(dim=1, keepdim=True)
+        loss = F.nll_loss(output, target.type(torch.LongTensor))
+        loss.backward()
+        optimizer.step()
 
-    def __len__(self):
-        return len(self.images)
-
-    def __getitem__(self, idx):
-        image = self.images[idx]
-        target = self.targets[idx]  # .item()  # Convert tensor to Python int
-        angle = self.angles[idx]  # .item()  # Convert tensor to Python int
-
-        return image, target, angle
+        if batch_idx % 100 == 0:
+            # script_run_logger.info(f"batch_idx = {batch_idx}, loss = {loss.item()}")
+            train_run_logger.info(
+                f"Train Epoch: [{batch_idx}/{ len(train_loader)} ({100. * batch_idx / len(train_loader):.2f}%)]\tLoss: {loss:.4f}"
+            )
 
 
-def new_train_model(dataset):
+def eval_loop(val_loader, model):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    total = 0
+
+    for batch_idx, (data, target, angle) in enumerate(val_loader):
+        data, target, _ = data, target, angle
+        output = model(data)
+        test_loss += F.nll_loss(
+            output, target.type(torch.LongTensor)
+        ).item()  # sum up batch loss
+        pred = output.argmax(
+            dim=1, keepdim=True
+        )  # get the index of the max log-probability
+        correct += pred.eq(target.view_as(pred)).sum().item()
+        total += target.size(0)
+
+        if batch_idx % 100 == 0:
+            # script_run_logger.info(f"batch_idx = {batch_idx}, loss = {loss.item()}")
+            train_run_logger.info(
+                f"Test Epoch: [{batch_idx}/{ len(val_loader)} ({100. * batch_idx / len(val_loader):.2f}%)]"
+            )
+
+    test_loss /= len(val_loader)
+    script_run_logger.info(
+        f"Test set: Average loss: {test_loss:.4f}, Accuracy: {correct}/{total} ({100*correct/total:.2f}%)"
+    )
+    return test_loss
+
+
+def train_and_tune_model(dataset):
     images, targets, angles = dataset
     var_chk_logger.debug(
         f"type(images) = {type(images)} targets = {type(targets)} angles = {type(angles)}"
@@ -117,11 +162,15 @@ def new_train_model(dataset):
             kf = KFold(n_splits=k_folds, shuffle=True)
 
             script_run_logger.info(
+                f"=== Running model with {num_conv_layers} conv layers, {num_linear_layers} linear layers ==="
+            )
+            train_run_logger.info(
                 f"\n=== Running model with {num_conv_layers} conv layers, {num_linear_layers} linear layers ==="
             )
+            script_run_logger.info("Check training log file for training logs")
 
             for fold, (train_index, val_index) in enumerate(kf.split(train_images)):
-                script_run_logger.info(f"Fold {fold+1}:")
+                script_run_logger.info(f"Training fold {fold+1}:")
 
                 train_images_fold = train_images[train_index]
                 # var_chk_logger.debug(
@@ -153,56 +202,19 @@ def new_train_model(dataset):
                 # var_chk_logger.debug("created dataloaders")
 
                 # training
-                model.train()
-                for batch_idx, (data, target, angle) in enumerate(train_loader):
-                    data, target, _ = data, target, angle
-                    # var_chk_logger.debug(f"data shape = {data.shape}, target shape = {target.shape}")
-                    optimizer.zero_grad()
-                    output = model(data)
-                    # pred = output.argmax(dim=1, keepdim=True)
-                    loss = F.nll_loss(output, target.type(torch.LongTensor))
-                    loss.backward()
-                    optimizer.step()
+                train_loop(train_loader, optimizer, model)
 
-                    if batch_idx % 100 == 0:
-                        # script_run_logger.info(f"batch_idx = {batch_idx}, loss = {loss.item()}")
-                        script_run_logger.info(
-                            f"Train Epoch: [{batch_idx}/{ len(train_loader)} ({100. * batch_idx / len(train_loader):.2f}%)]\tLoss: {loss:.4f}"
-                        )
+                script_run_logger.info("Running validation...")
 
                 # validation
-                test_loss = 0
-                correct = 0
-                total = 0
-                model.eval()
-                for batch_idx, (data, target, angle) in enumerate(val_loader):
-                    data, target, _ = data, target, angle
-                    output = model(data)
-                    test_loss += F.nll_loss(
-                        output, target.type(torch.LongTensor)
-                    ).item()  # sum up batch loss
-                    pred = output.argmax(
-                        dim=1, keepdim=True
-                    )  # get the index of the max log-probability
-                    correct += pred.eq(target.view_as(pred)).sum().item()
-                    total += target.size(0)
-
-                    if batch_idx % 100 == 0:
-                        # script_run_logger.info(f"batch_idx = {batch_idx}, loss = {loss.item()}")
-                        script_run_logger.info(
-                            f"Test Epoch: [{batch_idx}/{ len(val_loader)} ({100. * batch_idx / len(val_loader):.2f}%)]"
-                        )
-
-                test_loss /= len(val_loader)
-                script_run_logger.info(
-                    f"Test set: Average loss: {test_loss:.4f}, Accuracy: {correct}/{total} ({100*correct/total:.0f}%)"
-                )
+                test_loss = eval_loop(val_loader, model)
 
             torch.save(
                 model.state_dict(),
                 model_saving_path
                 + f"num_conv{num_conv_layers}_num_lin{num_linear_layers}",
             )
+
             #  add test loss and accuracy to dict
             model_perf_dict[f"{num_conv_layers}_{num_linear_layers}"] = test_loss  # type: ignore
 

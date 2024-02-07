@@ -20,7 +20,7 @@ def generate_oversampled_dataset(dataset, oversample_rate: float):
     to_generate_count = images.shape[0] * (oversample_rate - 1.0)
     to_generate_count = int(to_generate_count)
 
-    rotation_angles = [-30, -20, -10, 10, 20, 30]
+    rotation_angles = [-30, -20, -10, 0, 10, 20, 30]
     selected_indices = random.choices(
         population=range(images.shape[0]), k=to_generate_count
     )

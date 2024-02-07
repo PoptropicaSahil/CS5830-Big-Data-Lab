@@ -1,6 +1,5 @@
 import torch
 import torchvision.transforms.functional as TF
-# from utils.logging_config import var_chk_logger
 
 
 def rotate(

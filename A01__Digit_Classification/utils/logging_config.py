@@ -1,6 +1,6 @@
+import datetime
 import logging
 import os
-import datetime
 
 # Get the directory name of the file
 file_path = "./logs/"
@@ -19,9 +19,12 @@ log_file_name = file_path + curr_time.strftime("logs_%Y-%m-%d_%H-%M-%S.log")
 
 # overwriting one logging file before a run
 log_file_name = file_path + "logs.log"
+training_log_file_name = file_path + "training_" + "logs.log"
+
 with open(log_file_name, "w"):
     pass
-
+with open(training_log_file_name, "w"):
+    pass
 
 
 # variable checker logger
@@ -44,3 +47,14 @@ script_run_formatter = logging.Formatter(
 )
 script_run_handler.setFormatter(script_run_formatter)
 script_run_logger.addHandler(script_run_handler)
+
+
+# training logger
+train_run_logger = logging.getLogger("MODEL TRAINER")
+train_run_logger.setLevel(logging.INFO)
+train_run_handler = logging.FileHandler(training_log_file_name)
+train_run_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+train_run_handler.setFormatter(train_run_formatter)
+train_run_logger.addHandler(train_run_handler)
