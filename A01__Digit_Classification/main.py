@@ -31,7 +31,7 @@ def main():
     parser.add_argument(
         "--oversample_rate",
         type=float,
-        default=2,
+        default=8,
         help="Oversampling rate. Use 8 for 490k images",
     )
 

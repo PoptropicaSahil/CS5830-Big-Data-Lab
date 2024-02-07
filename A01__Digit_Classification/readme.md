@@ -6,7 +6,7 @@ To install the required packages, use the following command `pip install -r requ
 ## Running the code
 Ensure you are in the same directory as this file and run
 ```
-python main.py --data_dir (default: "./data") --oversample_rate (default: 2)
+python main.py --data_dir (default: "./data") --oversample_rate (default: 8)
 ```
 To run the pytest tests, run `pytest pytests/`. This will run all the files within the pytest directory.
 
