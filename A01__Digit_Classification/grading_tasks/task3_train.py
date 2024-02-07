@@ -75,7 +75,7 @@ def train_loop(train_loader, optimizer, model):
         loss.backward()
         optimizer.step()
 
-        if batch_idx % 200 == 0:
+        if batch_idx % 500 == 0:
             train_run_logger.info(
                 f"Train Epoch: [{batch_idx}/{ len(train_loader)} ({100. * batch_idx / len(train_loader):.2f}%)]\tLoss: {loss:.4f}"
             )
@@ -99,7 +99,7 @@ def eval_loop(val_loader, model):
         correct += pred.eq(target.view_as(pred)).sum().item()
         total += target.size(0)
 
-        if batch_idx % 200 == 0:
+        if batch_idx % 500 == 0:
             train_run_logger.info(
                 f"Test Epoch: [{batch_idx}/{ len(val_loader)} ({100. * batch_idx / len(val_loader):.2f}%)]"
             )
