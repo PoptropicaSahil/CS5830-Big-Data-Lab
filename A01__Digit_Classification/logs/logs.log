@@ -1,82 +1,36 @@
-2024-02-07 12:51:14,764 - SCRIPT RUNNER - INFO - args.data_dir is ./data
-2024-02-07 12:51:14,778 - SCRIPT RUNNER - INFO - args.learning_rate is 1e-05
-2024-02-07 12:51:14,778 - SCRIPT RUNNER - INFO - args.epochs is 5
-2024-02-07 12:51:14,778 - SCRIPT RUNNER - INFO - Existing data found at ./data
-2024-02-07 12:51:14,846 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully.
-2024-02-07 12:51:14,846 - SCRIPT RUNNER - INFO - Size of train data: 3, test data: 3
-2024-02-07 12:51:14,846 - VARIBLE CHECKS - DEBUG - image and label are of types (<class 'torch.Tensor'>, <class 'torch.Tensor'>)
-2024-02-07 12:51:14,846 - VARIBLE CHECKS - DEBUG - image size is torch.Size([28, 28])
-2024-02-07 12:51:14,846 - VARIBLE CHECKS - DEBUG - image type = <class 'torch.Tensor'>, label = 5
-2024-02-07 12:51:17,647 - VARIBLE CHECKS - DEBUG - image type = <class 'torch.Tensor'>, label = 5
-2024-02-07 12:51:18,673 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([10000, 28, 28]), targets shape = 10000, angles shape = 10000
-2024-02-07 12:51:30,525 - VARIBLE CHECKS - DEBUG - updated dataset len = 40000, type = <class 'list'>
-2024-02-07 12:51:30,525 - VARIBLE CHECKS - DEBUG - updated_targets len = 40000, type = <class 'list'>
-2024-02-07 12:51:30,525 - VARIBLE CHECKS - DEBUG - updated_angles len = 40000, type = <class 'list'>
-2024-02-07 12:51:30,638 - SCRIPT RUNNER - INFO - Oversampled train data, size = 40000
-2024-02-07 12:51:30,638 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([2500, 28, 28]), targets shape = 2500, angles shape = 2500
-2024-02-07 12:51:33,595 - VARIBLE CHECKS - DEBUG - updated dataset len = 10000, type = <class 'list'>
-2024-02-07 12:51:33,595 - VARIBLE CHECKS - DEBUG - updated_targets len = 10000, type = <class 'list'>
-2024-02-07 12:51:33,595 - VARIBLE CHECKS - DEBUG - updated_angles len = 10000, type = <class 'list'>
-2024-02-07 12:51:33,610 - SCRIPT RUNNER - INFO - Oversampled test data, size = 10000
-2024-02-07 12:51:33,610 - VARIBLE CHECKS - DEBUG - type(images) = <class 'torch.Tensor'> targets = <class 'list'> angles = <class 'list'>
-2024-02-07 12:51:33,610 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([40000, 1, 28, 28])
-2024-02-07 12:51:33,660 - VARIBLE CHECKS - DEBUG - shape images_sample= torch.Size([5000, 1, 28, 28]), len targets_sample = 5000
-2024-02-07 12:51:33,660 - SCRIPT RUNNER - INFO - Updated holdout data size = 5000
-2024-02-07 12:51:33,660 - SCRIPT RUNNER - INFO - Updated train data size = 35000
-2024-02-07 12:51:33,676 - SCRIPT RUNNER - INFO - Updated angle 0 data size = torch.Size([4967, 1, 28, 28])
-2024-02-07 12:51:33,676 - SCRIPT RUNNER - INFO - Updated holdout_set_0 data size = torch.Size([711, 1, 28, 28])
-2024-02-07 12:51:33,693 - SCRIPT RUNNER - INFO - Updated angle 0 data size = torch.Size([5077, 1, 28, 28])
-2024-02-07 12:51:33,693 - SCRIPT RUNNER - INFO - Updated holdout_set_0 data size = torch.Size([703, 1, 28, 28])
-2024-02-07 12:51:33,693 - VARIBLE CHECKS - DEBUG - type(images) = <class 'torch.Tensor'> targets = <class 'list'> angles = <class 'list'>
-2024-02-07 12:51:33,693 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([4967, 1, 28, 28])
-2024-02-07 12:51:33,742 - VARIBLE CHECKS - DEBUG - train_images type = <class 'torch.Tensor'> shape = torch.Size([3973, 1, 28, 28]) 
-2024-02-07 12:51:33,742 - VARIBLE CHECKS - DEBUG - train_targets type = <class 'numpy.ndarray'> len = 3973 
-2024-02-07 12:51:33,742 - SCRIPT RUNNER - INFO - Existing directory found, clearing contents ./trained_models/
-2024-02-07 12:51:33,762 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 1 linear layers ===
-2024-02-07 12:51:33,762 - SCRIPT RUNNER - INFO - Check training log file for training logs
-2024-02-07 12:51:33,762 - SCRIPT RUNNER - INFO - Training fold 1:
-2024-02-07 12:51:35,407 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:36,127 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.5973, Accuracy: 1727/1987 (86.91%)
-2024-02-07 12:51:36,127 - SCRIPT RUNNER - INFO - Training fold 2:
-2024-02-07 12:51:37,945 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:38,576 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.3729, Accuracy: 1862/1986 (93.76%)
-2024-02-07 12:51:38,598 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
+2024-02-07 23:41:18,977 - SCRIPT RUNNER - INFO - args.data_dir is ./data
+2024-02-07 23:41:18,977 - SCRIPT RUNNER - INFO - Existing data found at ./data
+2024-02-07 23:41:19,038 - SCRIPT RUNNER - INFO - MNIST dataset loaded successfully
+2024-02-07 23:41:19,038 - SCRIPT RUNNER - WARNING - images SHAPE = torch.Size([60000, 28, 28])
+2024-02-07 23:41:19,038 - SCRIPT RUNNER - WARNING - images SHAPE in MAIN GEN DATA TUPLE = torch.Size([60000, 28, 28])
+2024-02-07 23:41:19,038 - SCRIPT RUNNER - WARNING - images SHAPE = torch.Size([10000, 28, 28])
+2024-02-07 23:41:19,038 - SCRIPT RUNNER - INFO - converted data to tuple form
+2024-02-07 23:41:19,038 - SCRIPT RUNNER - INFO - Existing metrics directory found, clearing contents ./plots/
+2024-02-07 23:41:20,897 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
+2024-02-07 23:41:20,898 - SCRIPT RUNNER - INFO - Size of train data: 60000, test data: 10000
+2024-02-07 23:41:22,355 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
+2024-02-07 23:41:23,917 - SCRIPT RUNNER - INFO - Added sample data plots to ./plots/
+2024-02-07 23:41:40,456 - VARIBLE CHECKS - DEBUG - Updated oversampled dataset size = 60000)
+2024-02-07 23:41:42,759 - VARIBLE CHECKS - DEBUG - Updated oversampled dataset size = 10000)
+2024-02-07 23:41:42,771 - SCRIPT RUNNER - INFO - Oversampled train data, size = 60000
+2024-02-07 23:41:42,772 - SCRIPT RUNNER - INFO - Oversampled test data, size = 10000
+2024-02-07 23:41:42,772 - SCRIPT RUNNER - WARNING - images SHAPE in MAIN GEN OVERSAMPLED = torch.Size([60000, 1, 28, 28])
+2024-02-07 23:41:42,772 - VARIBLE CHECKS - DEBUG - type(images) = <class 'torch.Tensor'> targets = <class 'list'> angles = <class 'list'>
+2024-02-07 23:41:42,772 - VARIBLE CHECKS - DEBUG - images shape = torch.Size([60000, 1, 28, 28])
+2024-02-07 23:41:42,845 - VARIBLE CHECKS - DEBUG - shape images_sample= torch.Size([5000, 1, 28, 28]), len targets_sample = 5000
+2024-02-07 23:41:42,847 - SCRIPT RUNNER - INFO - Updated holdout data size = 5000
+2024-02-07 23:41:42,847 - SCRIPT RUNNER - INFO - Updated train data size = 55000
+2024-02-07 23:41:42,859 - SCRIPT RUNNER - INFO - Updated 0 degrees train data size = torch.Size([7747, 1, 28, 28])
+2024-02-07 23:41:42,859 - SCRIPT RUNNER - INFO - Check training log file for training logs
+2024-02-07 23:41:42,859 - SCRIPT RUNNER - WARNING - Training on set of 0 degrees rotation
+2024-02-07 23:41:42,900 - SCRIPT RUNNER - INFO - Training on full train set
+2024-02-07 23:41:42,900 - SCRIPT RUNNER - INFO - Fetched best model in main script
+2024-02-07 23:41:42,900 - SCRIPT RUNNER - INFO - Checking performance on full holdout set
+2024-02-07 23:41:43,023 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/40 (0.00%)]
+2024-02-07 23:41:44,634 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.1535, Accuracy: 4817/5000 (96.34%)
 
-2024-02-07 12:51:38,612 - SCRIPT RUNNER - INFO - === Running model with 1 conv layers, 2 linear layers ===
-2024-02-07 12:51:38,612 - SCRIPT RUNNER - INFO - Check training log file for training logs
-2024-02-07 12:51:38,613 - SCRIPT RUNNER - INFO - Training fold 1:
-2024-02-07 12:51:40,393 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:40,933 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.9198, Accuracy: 1722/1987 (86.66%)
-2024-02-07 12:51:40,933 - SCRIPT RUNNER - INFO - Training fold 2:
-2024-02-07 12:51:42,151 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:42,654 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.6018, Accuracy: 1803/1986 (90.79%)
-2024-02-07 12:51:42,654 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
-
-2024-02-07 12:51:42,669 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 1 linear layers ===
-2024-02-07 12:51:42,669 - SCRIPT RUNNER - INFO - Check training log file for training logs
-2024-02-07 12:51:42,669 - SCRIPT RUNNER - INFO - Training fold 1:
-2024-02-07 12:51:45,166 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:46,047 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.6361, Accuracy: 1744/1987 (87.77%)
-2024-02-07 12:51:46,047 - SCRIPT RUNNER - INFO - Training fold 2:
-2024-02-07 12:51:49,300 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:50,228 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.3782, Accuracy: 1842/1986 (92.75%)
-2024-02-07 12:51:50,237 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
-
-2024-02-07 12:51:50,240 - SCRIPT RUNNER - INFO - === Running model with 2 conv layers, 2 linear layers ===
-2024-02-07 12:51:50,240 - SCRIPT RUNNER - INFO - Check training log file for training logs
-2024-02-07 12:51:50,240 - SCRIPT RUNNER - INFO - Training fold 1:
-2024-02-07 12:51:53,157 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:54,041 - SCRIPT RUNNER - INFO - Test set: Average loss: 1.6482, Accuracy: 803/1987 (40.41%)
-2024-02-07 12:51:54,041 - SCRIPT RUNNER - INFO - Training fold 2:
-2024-02-07 12:51:57,690 - SCRIPT RUNNER - INFO - Running validation...
-2024-02-07 12:51:58,730 - SCRIPT RUNNER - INFO - Test set: Average loss: 0.6327, Accuracy: 1782/1986 (89.73%)
-2024-02-07 12:51:58,730 - SCRIPT RUNNER - INFO - Saved model state and updated with model performance logs
-
-2024-02-07 12:51:58,730 - SCRIPT RUNNER - INFO - Fetched best model config: num_conv_layers = 1, num_linear_layers = 1
-2024-02-07 12:51:58,779 - SCRIPT RUNNER - INFO - Fetched best model from saved models
-2024-02-07 12:51:58,779 - SCRIPT RUNNER - INFO - Fetched best model in main script
-2024-02-07 12:51:58,799 - SCRIPT RUNNER - INFO - Ground truth Epoch: [0/12 (0.00%)]
-2024-02-07 12:51:59,030 - SCRIPT RUNNER - INFO - Ground truth dataset: Average loss: 0.4527, Accuracy: 648/711 (91.14%)
-
-2024-02-07 12:51:59,030 - SCRIPT RUNNER - WARNING - Test loss (0.4527) is higher than threshold 0.15
-2024-02-07 12:51:59,031 - SCRIPT RUNNER - INFO - Got flag value 1
+2024-02-07 23:41:44,634 - SCRIPT RUNNER - WARNING - Test loss (0.1535) is lower than threshold 0.3!
+2024-02-07 23:41:44,642 - SCRIPT RUNNER - INFO - Got flag value 0
+2024-02-07 23:41:44,642 - SCRIPT RUNNER - INFO - Generating performance metrics
+2024-02-07 23:41:44,642 - SCRIPT RUNNER - INFO - Existing metrics directory found, clearing contents ./performance_metrics/
+2024-02-07 23:41:46,788 - SCRIPT RUNNER - INFO - show_model_predictions

@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,8 +7,29 @@ from sklearn.model_selection import train_test_split
 from torchvision import datasets, transforms
 from utils.logging_config import script_run_logger, var_chk_logger
 
+plots_save_dir = "./plots/"
+
+
+def clear_plots_dir():
+    """
+    Clears the plots directory by creating a new directory if it doesn't exist, or clearing the contents if it does.
+    """
+    if not os.path.exists(plots_save_dir):
+        script_run_logger.info(
+            f"Existing directory not found, creating: {plots_save_dir}"
+        )
+        os.makedirs(plots_save_dir)
+    else:
+        # clear contents of the dir if it already exists
+        script_run_logger.info(
+            f"Existing metrics directory found, clearing contents {plots_save_dir}"
+        )
+        shutil.rmtree(plots_save_dir)
+        os.makedirs(plots_save_dir)
+
 
 def plot_random_samples_from_data(dataset):
+    """Plots random samples from the given dataset and saves the plot to a file"""
     images, targets, angles = dataset
     fig, axes = plt.subplots(1, 3, figsize=(12, 3))
     plt.title("Few training samples")
@@ -15,22 +37,26 @@ def plot_random_samples_from_data(dataset):
         axes[i].imshow(images[i].numpy().squeeze(), cmap="gray")
         axes[i].set_title(f"Label: {targets[i]}, Angle: {angles[i]}")
         axes[i].axis("off")
+    plt.savefig(f"{plots_save_dir}sample_data_plots.png", bbox_inches="tight")
     plt.show()
-    script_run_logger.info("Showing sample data points")
+    script_run_logger.info(f"Added sample data plots to {plots_save_dir}")
     return
 
 
 def plot_image(image, label=None, angle=None):
-    var_chk_logger.debug(f"image type = {type(image)}, label = {label}")
-    # fig, axes = plt.plot(figsize=(12, 3))
+    """Plot an image with optional label and angle"""
     title = f"Plot given figure \n Label: {label}, angle = {angle}"
     plt.title(title)
     plt.imshow(image.numpy().squeeze(), cmap="gray")
     plt.axis("off")
+    plt.savefig(f"{plots_save_dir}sample_data.png", bbox_inches="tight")
     plt.show()
+    script_run_logger.info(f"Added sample data plots to {plots_save_dir}")
 
 
-def get_datasets(save_path):
+def get_datasets(save_path = "./data"):
+    """Function to get datasets from the specified save path"""
+
     if not os.path.exists(save_path):
         script_run_logger.info(f"Existing data not found, creating: {save_path}")
         os.makedirs(save_path)
@@ -53,6 +79,7 @@ def get_datasets(save_path):
 
 
 def generate_data_tuple(dataset):
+    """returns the datasets in tuple form used in the work"""
     images, targets = dataset.data, dataset.targets
     angles = [int(0)] * len(targets)
     dataset = images, targets, angles
@@ -60,6 +87,7 @@ def generate_data_tuple(dataset):
 
 
 def generate_dataset_sample(dataset, n_samples=1000):
+    """generate small sample for faster use"""
     random_state = 42
     images, targets, angles = dataset
     (
@@ -78,8 +106,13 @@ def generate_dataset_sample(dataset, n_samples=1000):
 
 
 def generate_dataset_by_angle(dataset, angle_value):
+    """Generate a dataset by filtering images, targets, and angles based on a specific angle value"""
     images, targets, angles = dataset
-    filter_idx = np.where(np.array(angles) == angle_value)[0]
+
+    if isinstance(angle_value, int):
+        angle_value = [angle_value]
+
+    filter_idx = np.where(np.isin(angles, angle_value))[0]
 
     filtered_images = images[filter_idx]
     filtered_targets = [targets[i] for i in filter_idx]
@@ -89,6 +122,8 @@ def generate_dataset_by_angle(dataset, angle_value):
 
 
 def generate_holdout_set(dataset, holdout_size=1000):
+    """Generate a holdout dataset to be never used in training or validation"""
+
     images, targets, angles = dataset
     var_chk_logger.debug(
         f"type(images) = {type(images)} targets = {type(targets)} angles = {type(angles)}"
