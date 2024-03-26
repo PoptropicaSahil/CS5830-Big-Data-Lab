@@ -1,0 +1,25 @@
+2024-03-26 21:25:20,209 - A03 Logger - INFO - input files are ['data/raw\\48381099999.csv', 'data/raw\\54337099999.csv', 'data/raw\\57483099999.csv']
+2024-03-26 21:25:20,265 - A03 Logger - INFO -        STATION                 DATE   LATITUDE   LONGITUDE  ELEVATION  ... BackupEquipment BackupLatitude  BackupLongitude  BackupName  WindEquipmentChangeDate
+0  48381099999  1960-01-01T07:00:00  16.466628  102.783661     204.21  ...             NaN            NaN              NaN         NaN                      NaN
+1  48381099999  1960-01-01T10:00:00  16.466628  102.783661     204.21  ...             NaN            NaN              NaN         NaN                      NaN
+2  48381099999  1960-01-01T13:00:00  16.466628  102.783661     204.21  ...             NaN            NaN              NaN         NaN                      NaN
+3  48381099999  1960-01-01T16:00:00  16.466628  102.783661     204.21  ...             NaN            NaN              NaN         NaN                      NaN
+4  48381099999  1960-01-01T19:00:00  16.466628  102.783661     204.21  ...             NaN            NaN              NaN         NaN                      NaN
+
+[5 rows x 125 columns]
+2024-03-26 21:25:20,623 - A03 Logger - INFO -        STATION                 DATE   LATITUDE   LONGITUDE  ELEVATION  ... BackupEquipment BackupLatitude  BackupLongitude  BackupName WindEquipmentChangeDate
+0  54337099999  1960-01-01T02:00:00  41.133333  121.116667       70.0  ...             NaN            NaN              NaN         NaN                     NaN
+1  54337099999  1960-01-01T05:00:00  41.133333  121.116667       70.0  ...             NaN            NaN              NaN         NaN                     NaN
+2  54337099999  1960-01-01T08:00:00  41.133333  121.116667       70.0  ...             NaN            NaN              NaN         NaN                     NaN
+3  54337099999  1960-01-01T11:00:00  41.133333  121.116667       70.0  ...             NaN            NaN              NaN         NaN                     NaN
+4  54337099999  1960-01-01T14:00:00  41.133333  121.116667       70.0  ...             NaN            NaN              NaN         NaN                     NaN
+
+[5 rows x 125 columns]
+2024-03-26 21:25:20,973 - A03 Logger - INFO -        STATION                 DATE  LATITUDE  LONGITUDE  ELEVATION  ... BackupEquipment BackupLatitude  BackupLongitude  BackupName  WindEquipmentChangeDate
+0  57483099999  1960-01-01T08:00:00     30.65     113.65       30.0  ...             NaN            NaN              NaN         NaN                      NaN
+1  57483099999  1960-01-01T14:00:00     30.65     113.65       30.0  ...             NaN            NaN              NaN         NaN                      NaN
+2  57483099999  1960-01-01T20:00:00     30.65     113.65       30.0  ...             NaN            NaN              NaN         NaN                      NaN
+3  57483099999  1960-01-02T08:00:00     30.65     113.65       30.0  ...             NaN            NaN              NaN         NaN                      NaN
+4  57483099999  1960-01-02T14:00:00     30.65     113.65       30.0  ...             NaN            NaN              NaN         NaN                      NaN
+
+[5 rows x 125 columns]

@@ -15,3 +15,10 @@ data-pipeline/
 ├── README.md
 └── .gitignore
 ```
+
+### Commands
+* `dvc init --subdir`
+* `dvc add data`
+* `git add .gitignore data.dvc`
+* `git rm -r --cached 'data\raw'`
+* `dvc stage add -n download --force --deps params.yaml -o data/raw --wdir=. "python src/download.py"`

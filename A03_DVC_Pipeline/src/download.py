@@ -1,17 +1,15 @@
-from email import utils
 import os
 import wget
 import requests
 from bs4 import BeautifulSoup
 import random
 import sys
+import shutil
 
-# sys.path.append("..")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from utils.logging_config import a03_logger
 
-import shutil
 
 
 
@@ -24,7 +22,7 @@ def download_data(year, n_locs, data_dir):
     a03_logger.info(f'cleared the data directory {data_dir}')
 
     # Step 1: Fetch the HTML content
-    url = f"https://www.ncei.noaa.gov/data/local-climatological-data/access/{year}"
+    url = f"https://www.ncei.noaa.gov/data/local-climatological-data/access/{year}/"
     response = requests.get(url)
     html_content = response.text
     
@@ -40,10 +38,11 @@ def download_data(year, n_locs, data_dir):
     
     # Step 4: Download the selected files
     for idx, link in enumerate(download_urls):
-        filename = os.path.join(data_dir, f"climatological_data_sample_{idx}.csv")
-        wget.download(url, filename)
+        csv_name = link.split("/")[-1]
+        filename = os.path.join(data_dir, csv_name)
+        wget.download(link, filename)
 
-    a03_logger.info(f'downlaoded the files')
+    a03_logger.info(f'downloaded the files')
 
 
 if __name__ == "__main__":
