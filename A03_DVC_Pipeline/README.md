@@ -52,3 +52,9 @@ git add dvc.yaml
 ```
 
 * `dvc repro`
+
+$ mkdir -p /tmp/dvc_storage
+$ dvc remote add --default loc_remote /tmp/dvc_storage
+Setting 'loc_remote' as a default remote.
+$ git add .dvc/config
+$ git commit -m "Configure remote storage loc_remote"
