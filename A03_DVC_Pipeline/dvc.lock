@@ -5,11 +5,60 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: 9aa443c3016ac0482a18745247498708
-      size: 22
+      md5: f935b428c9a750fe0119a9462978d606
+      size: 21
     outs:
     - path: data/raw
       hash: md5
-      md5: 8902e099dbf7c092da4ab0b9cfbfc4f5.dir
-      size: 2743862
-      nfiles: 3
+      md5: c2e6e9b1d11f327ca69dd8f42b95d9bb.dir
+      size: 6028381
+      nfiles: 2
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: c2e6e9b1d11f327ca69dd8f42b95d9bb.dir
+      size: 6028381
+      nfiles: 2
+    - path: src/prepare.py
+      hash: md5
+      md5: ab081ff3cf76f74d6ed21fd6b16c8be0
+      size: 1528
+    outs:
+    - path: outputs/processed/ground_truth.csv
+      hash: md5
+      md5: ecf6989e71f213af2502d9feadd9cefd
+      size: 231
+  process:
+    cmd: python src/process.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: c2e6e9b1d11f327ca69dd8f42b95d9bb.dir
+      size: 6028381
+      nfiles: 2
+    - path: src/process.py
+      hash: md5
+      md5: 966403c6684f4d77b4c33a1da7e17e74
+      size: 1973
+    outs:
+    - path: outputs/processed/computed_aggregates.csv
+      hash: md5
+      md5: 0bc1272c0b80486a4935cf4fa2ceebf3
+      size: 476
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: outputs/processed/computed_aggregates.csv
+      hash: md5
+      md5: 0bc1272c0b80486a4935cf4fa2ceebf3
+      size: 476
+    - path: outputs/processed/ground_truth.csv
+      hash: md5
+      md5: ecf6989e71f213af2502d9feadd9cefd
+      size: 231
+    - path: src/evaluate.py
+      hash: md5
+      md5: 87e56feaa4bfc10b82a65617c272ed06
+      size: 845

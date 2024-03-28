@@ -5,3 +5,23 @@ stages:
     - params.yaml
     outs:
     - data/raw
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - data/raw
+    - src/prepare.py
+    outs:
+    - outputs/processed/ground_truth.csv
+  process:
+    cmd: python src/process.py
+    deps:
+    - data/raw
+    - src/process.py
+    outs:
+    - outputs/processed/computed_aggregates.csv
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - outputs/processed/computed_aggregates.csv
+    - outputs/processed/ground_truth.csv
+    - src/evaluate.py
