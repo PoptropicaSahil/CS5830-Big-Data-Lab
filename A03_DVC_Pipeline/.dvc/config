@@ -1,0 +1,4 @@
+[core]
+    remote = loc_remote
+['remote "loc_remote"']
+    url = C:/Users/Admin/AppData/Local/Temp/dvc_storage
