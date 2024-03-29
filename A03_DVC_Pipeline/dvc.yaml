@@ -1,10 +1,11 @@
 stages:
   download:
     cmd: python src/download.py
-    deps:
-    - params.yaml
     outs:
     - data/raw
+    params:
+    - n_locs
+    - year
   prepare:
     cmd: python src/prepare.py
     deps:

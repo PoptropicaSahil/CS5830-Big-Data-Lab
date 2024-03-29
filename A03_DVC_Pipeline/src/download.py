@@ -11,6 +11,7 @@ import pandas as pd
 import time
 import re
 import glob
+import yaml
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -75,15 +76,15 @@ def download_data(year, n_locs, data_dir):
             useful_urls.append(url)
             a03_logger.info(f'USEFUL CSV DATA found for {url}')
         else:
-            a03_logger.info(f'Unusable CSV DATA at {url}, skipping ...')
+            a03_logger.debug(f'Unusable CSV DATA at {url}, skipping ...')
 
 
     # Call the download_file function and collect the list of URLs
-    try:
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            executor.map(download_file, download_urls)
-    except Exception as e:
-        a03_logger.info(f"Stopping downloading: {str(e)}")
+    # try:
+    #     with concurrent.futures.ThreadPoolExecutor() as executor:
+    #         executor.map(download_file, download_urls)
+    # except Exception as e:
+    #     a03_logger.info(f"Stopping downloading: {str(e)}")
     
     
     a03_logger.info(f'Number of useful_urls found is {len(useful_urls)}')
@@ -112,6 +113,14 @@ def download_data(year, n_locs, data_dir):
 
 
 if __name__ == "__main__":
-    # Replace with your actual data source URL
+    
+    # Read the params from the params.yaml file as given in
+    # https://github.com/iterative/example-get-started/blob/main/src/prepare.py#L41
+    params = yaml.safe_load(open("params.yaml"))
+    a03_logger.info(f'params are {params}')
+    year = params['year']
+    n_locs = params['n_locs']
+
     data_dir = "data/raw"
-    download_data(year=2014, n_locs=2, data_dir=data_dir)
+    # download_data(year=2016, n_locs=1, data_dir=data_dir)
+    download_data(year, n_locs, data_dir=data_dir)
