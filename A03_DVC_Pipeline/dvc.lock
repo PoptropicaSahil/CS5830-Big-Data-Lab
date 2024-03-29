@@ -2,61 +2,60 @@ schema: '2.0'
 stages:
   download:
     cmd: python src/download.py
-    deps:
-    - path: params.yaml
-      hash: md5
-      md5: f96704ff1a4d10474065c2d4d8b5f61b
-      size: 21
+    params:
+      params.yaml:
+        n_locs: 200
+        year: 201111
     outs:
     - path: data/raw
       hash: md5
-      md5: c2e6e9b1d11f327ca69dd8f42b95d9bb.dir
-      size: 6028381
-      nfiles: 2
+      md5: 300e2bd74b3668acd7ec40cdd111258c.dir
+      size: 6828245
+      nfiles: 4
   prepare:
     cmd: python src/prepare.py
     deps:
     - path: data/raw
       hash: md5
-      md5: c2e6e9b1d11f327ca69dd8f42b95d9bb.dir
-      size: 6028381
-      nfiles: 2
+      md5: 300e2bd74b3668acd7ec40cdd111258c.dir
+      size: 6828245
+      nfiles: 4
     - path: src/prepare.py
       hash: md5
-      md5: ab081ff3cf76f74d6ed21fd6b16c8be0
-      size: 1528
+      md5: 91c1e5dc76d006f13f8a690abcd88ac8
+      size: 1244
     outs:
     - path: outputs/processed/ground_truth.csv
       hash: md5
-      md5: ecf6989e71f213af2502d9feadd9cefd
-      size: 231
+      md5: e79e928cbd8c9ff28ca1e3cf917dac03
+      size: 446
   process:
     cmd: python src/process.py
     deps:
     - path: data/raw
       hash: md5
-      md5: c2e6e9b1d11f327ca69dd8f42b95d9bb.dir
-      size: 6028381
+      md5: cce8892cc425e351c8be37df222617c3.dir
+      size: 47834036
       nfiles: 2
     - path: src/process.py
       hash: md5
-      md5: 966403c6684f4d77b4c33a1da7e17e74
-      size: 1973
+      md5: 14a7e7cb4ce05efd8c0f058acc049b92
+      size: 1836
     outs:
     - path: outputs/processed/computed_aggregates.csv
       hash: md5
-      md5: 0bc1272c0b80486a4935cf4fa2ceebf3
-      size: 476
+      md5: 7bd7a1664d85ce97ceb0c3d540daa5af
+      size: 522
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: outputs/processed/computed_aggregates.csv
       hash: md5
-      md5: 0bc1272c0b80486a4935cf4fa2ceebf3
-      size: 476
+      md5: 7bd7a1664d85ce97ceb0c3d540daa5af
+      size: 522
     - path: outputs/processed/ground_truth.csv
       hash: md5
-      md5: ecf6989e71f213af2502d9feadd9cefd
+      md5: ed9a07c7e0125ef11dd99b9a28e000ce
       size: 231
     - path: src/evaluate.py
       hash: md5

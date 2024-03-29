@@ -52,9 +52,9 @@ def download_data(year, n_locs, data_dir):
     
     
     # Step 4: Download the selected files
-    # Check 10x the required files for non-missing monthly aggregate files 
+    # Check 20x the required files for non-missing monthly aggregate files 
     # because there are a lot of files (and slow process) if done one-by-one
-    num_files_to_read = n_locs * 2 #########
+    num_files_to_read = n_locs * 20 #########
     download_urls = download_urls[::-1][:num_files_to_read]
     
 
@@ -62,13 +62,14 @@ def download_data(year, n_locs, data_dir):
 
     def download_file(url):
         nonlocal useful_urls
+   
         monthly_agg_cols = ['MonthlyMeanTemperature']   
         date_col = ['DATE']
         useful_agg_cols = date_col + monthly_agg_cols
         df = pd.read_csv(url, usecols=useful_agg_cols)
 
         # Check if the length of useful_urls exceeds n_locs
-        if len(useful_urls) > n_locs:
+        if len(useful_urls) >= n_locs:
             raise Exception("Enough URLs found, stopping the execution.")
 
         # Only download file if all 12 rows monthly aggregate rows are present
@@ -76,22 +77,20 @@ def download_data(year, n_locs, data_dir):
             useful_urls.append(url)
             a03_logger.info(f'USEFUL CSV DATA found for {url}')
         else:
-            a03_logger.debug(f'Unusable CSV DATA at {url}, skipping ...')
+            a03_logger.debug(f'Unusable csv files at {url}, skipping ...')
 
 
     # Call the download_file function and collect the list of URLs
-    # try:
-    #     with concurrent.futures.ThreadPoolExecutor() as executor:
-    #         executor.map(download_file, download_urls)
-    # except Exception as e:
-    #     a03_logger.info(f"Stopping downloading: {str(e)}")
+    try:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            executor.map(download_file, download_urls)
+    except Exception as e:
+        a03_logger.info(f"Stopping downloading: {str(e)}")
     
     
     a03_logger.info(f'Number of useful_urls found is {len(useful_urls)}')
     a03_logger.info(f'useful_urls found is {useful_urls}')
 
-    # useful_urls = ['https://www.ncei.noaa.gov/data/local-climatological-data/access/2012/A0000953862.csv', 
-    #                ]
 
     # Step 5: Download the selected files to the data directory
     for url in useful_urls:
@@ -113,6 +112,8 @@ def download_data(year, n_locs, data_dir):
 
 
 if __name__ == "__main__":
+
+    a03_logger.info(f'\n\n========== NEW RUN ==========')
     
     # Read the params from the params.yaml file as given in
     # https://github.com/iterative/example-get-started/blob/main/src/prepare.py#L41
@@ -121,6 +122,20 @@ if __name__ == "__main__":
     year = params['year']
     n_locs = params['n_locs']
 
+    # Type checks for year and n_locs
+    if (not isinstance(year, int)) or (not isinstance(n_locs, int)):
+        a03_logger.error(f'Entered params are not INTEGERs, please enter INTEGER VALUES')
+        exit(1234)
+
+    # Range checks
+    if not (1901 <= year <= 2024):
+        a03_logger.error(f'Year {year} invalid. Enter INTEGER value between 1901 and 2024...')
+        exit(1234)
+    if not (1 <= n_locs <= 50):
+        a03_logger.error(f'n_locs {n_locs} invalid. Enter INTEGER value between 1 and 50...')
+        exit(1234)
+
+    a03_logger.info(f'Performed boundary and validation checks on input params')
+
     data_dir = "data/raw"
-    # download_data(year=2016, n_locs=1, data_dir=data_dir)
     download_data(year, n_locs, data_dir=data_dir)

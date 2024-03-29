@@ -9,35 +9,28 @@ from utils.logging_config import a03_logger
 def compute_monthly_aggregates(input_files, output_file, fields):
     aggregates = []
     for file in input_files:
-        a03_logger.info(f'extracting monthly aggregate of {file}')
+        a03_logger.info(f'computing monthly aggregate of {file}')
         
         monthly_agg_cols = ['MonthlyMeanTemperature']  # MonthlyDewpointTemperature
-        daily_agg_cols = ['DailyAverageDryBulbTemperature']
-        # df = df[['DATE'] + monthly_agg_cols]
-        date_cols = ['DATE']
+        daily_agg_cols = 'DailyAverageDryBulbTemperature'
+        date_cols = 'DATE'
 
-        useful_cols = daily_agg_cols + date_cols
+        useful_cols = [daily_agg_cols] + [date_cols]
         df = pd.read_csv(file,  usecols=useful_cols)
-        # df = df.dropna(axis = 0)
-        print(df.shape)
-        print(df.head())
-        print(df.info())
+        df[date_cols] = pd.to_datetime(df[date_cols])  # Ensure the 'DATE' column is in datetime format
 
-        df['DATE'] = pd.to_datetime(df['DATE'])  # Ensure the 'DATE' column is in datetime format
+        # Some files have the Daily readings as
+        # 24, 20s, 24 ...
+        # So we just extract the numbers
+        # explicitly convert the column to a string type at first
+        df[daily_agg_cols] = df[daily_agg_cols].astype(str)
+        df[daily_agg_cols] = df[daily_agg_cols].str.extract('(\d+)').astype(float)
+
 
         # Group by month and calculate the mean temperature
-        monthly_averages = df.groupby(df['DATE'].dt.month)['DailyAverageDryBulbTemperature'].mean()
-
-        print(monthly_averages)
+        monthly_averages = df.groupby(df['DATE'].dt.month)[daily_agg_cols].mean()
         aggregates.append(monthly_averages)
 
-
-        # for field in monthly_agg_cols:
-        #     monthly_agg = df.groupby(pd.Grouper(freq='M'))[field].mean()
-        #     dfs.append(monthly_agg)
-    
-    # combined_df = pd.concat(dfs, axis=1)
-    # combined_df.to_csv(output_file, index=True)
         
     combined_df = pd.concat(aggregates)
     combined_df.reset_index(drop=True).to_csv(output_file, index=True)

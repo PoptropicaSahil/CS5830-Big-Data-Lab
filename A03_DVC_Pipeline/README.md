@@ -1,3 +1,4 @@
+# 
 ### Repo Structure
 ```
 data-pipeline/
@@ -22,11 +23,12 @@ data-pipeline/
 * `git add .gitignore data.dvc`
 * `git rm -r --cached 'data\raw'`
 * `dvc stage add -n download --force --deps params.yaml -o data/raw --wdir=. "python src/download.py"`
+* `dvc stage add -n download --force -p year -p n_locs -o data/raw --wdir=. "python src/download.py"`
 * `dvc stage add -n prepare --force --deps data/raw --deps src/prepare.py -o outputs/processed/ground_truth.csv --wdir=. "python src/prepare.py"`
 * `dvc stage add -n process --force --deps data/raw --deps src/process.py -o outputs/processed/computed_aggregates.csv --wdir=. "python src/process.py"`
 * `dvc stage add -n evaluate --force --deps outputs/processed/ground_truth.csv --deps outputs/processed/computed_aggregates.csv --deps src/evaluate.py --wdir=. "python src/evaluate.py"`
 * `dvc dag`
-
+* `dvc repro --no-run-cache --force-downstream`
 
 <!--  -->
 git add 'outputs\processed\.gitignore' dvc.yaml
