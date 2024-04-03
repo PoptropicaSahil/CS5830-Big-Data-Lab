@@ -4,22 +4,22 @@ stages:
     cmd: python src/download.py
     params:
       params.yaml:
-        n_locs: 200
-        year: 201111
+        n_locs: 3
+        year: 2012
     outs:
     - path: data/raw
       hash: md5
-      md5: 300e2bd74b3668acd7ec40cdd111258c.dir
-      size: 6828245
-      nfiles: 4
+      md5: 48f621f2a995a14cd4763a5dac4fd3ba.dir
+      size: 54106552
+      nfiles: 3
   prepare:
     cmd: python src/prepare.py
     deps:
     - path: data/raw
       hash: md5
-      md5: 300e2bd74b3668acd7ec40cdd111258c.dir
-      size: 6828245
-      nfiles: 4
+      md5: 48f621f2a995a14cd4763a5dac4fd3ba.dir
+      size: 54106552
+      nfiles: 3
     - path: src/prepare.py
       hash: md5
       md5: 91c1e5dc76d006f13f8a690abcd88ac8
@@ -27,16 +27,16 @@ stages:
     outs:
     - path: outputs/processed/ground_truth.csv
       hash: md5
-      md5: e79e928cbd8c9ff28ca1e3cf917dac03
-      size: 446
+      md5: b1120c4d08a162545d87f8407a113aba
+      size: 339
   process:
     cmd: python src/process.py
     deps:
     - path: data/raw
       hash: md5
-      md5: cce8892cc425e351c8be37df222617c3.dir
-      size: 47834036
-      nfiles: 2
+      md5: 48f621f2a995a14cd4763a5dac4fd3ba.dir
+      size: 54106552
+      nfiles: 3
     - path: src/process.py
       hash: md5
       md5: 14a7e7cb4ce05efd8c0f058acc049b92
@@ -44,19 +44,19 @@ stages:
     outs:
     - path: outputs/processed/computed_aggregates.csv
       hash: md5
-      md5: 7bd7a1664d85ce97ceb0c3d540daa5af
-      size: 522
+      md5: e8ecd04800ace72e97dba01650cecd1f
+      size: 729
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: outputs/processed/computed_aggregates.csv
       hash: md5
-      md5: 7bd7a1664d85ce97ceb0c3d540daa5af
-      size: 522
+      md5: e8ecd04800ace72e97dba01650cecd1f
+      size: 729
     - path: outputs/processed/ground_truth.csv
       hash: md5
-      md5: ed9a07c7e0125ef11dd99b9a28e000ce
-      size: 231
+      md5: b1120c4d08a162545d87f8407a113aba
+      size: 339
     - path: src/evaluate.py
       hash: md5
       md5: 87e56feaa4bfc10b82a65617c272ed06

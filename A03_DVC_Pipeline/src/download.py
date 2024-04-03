@@ -61,6 +61,8 @@ def download_data(year, n_locs, data_dir):
     useful_urls  = []
 
     def download_file(url):
+        """Download a file from a given URL if it contains sufficient non null monthly aggregate values
+        """
         nonlocal useful_urls
    
         monthly_agg_cols = ['MonthlyMeanTemperature']   
@@ -81,6 +83,7 @@ def download_data(year, n_locs, data_dir):
 
 
     # Call the download_file function and collect the list of URLs
+    # Try using Concurrent for parallel processing
     try:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             executor.map(download_file, download_urls)
