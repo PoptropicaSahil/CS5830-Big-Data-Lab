@@ -1,0 +1,10 @@
+services:
+    web:
+        build: .
+        ports:
+        - "10000:7000"
+        environment:
+        - ENV_MY=1
+        volumes:
+        - .:/src_env
+
