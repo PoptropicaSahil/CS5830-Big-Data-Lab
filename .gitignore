@@ -11,5 +11,9 @@ venv
 *.gz
 *.pyc
 
+# mlflow files
+mlartifacts
+mlruns
+
 # Revati's files
 *Revati
