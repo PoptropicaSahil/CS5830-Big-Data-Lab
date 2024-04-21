@@ -4,6 +4,7 @@
 # trained models
 trained_models
 *.keras
+!A06_FastAPI/mnist-epoch-10.keras
 
 # venv
 venv
