@@ -3,6 +3,7 @@
 
 # trained models
 trained_models
+*.keras
 
 # venv
 venv
