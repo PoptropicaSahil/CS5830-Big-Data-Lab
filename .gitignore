@@ -5,9 +5,14 @@
 trained_models
 *.keras
 !A06_FastAPI/mnist-epoch-10.keras
+!A07_git_clone/fastapi-prometheus-grafana-sahil/app/mnist-model.keras
 
 # venv
 venv
+
+# grafana and prometheus
+A07_Docker_Prosthemous/grafana-enterprise-10.4.2.windows-amd64
+A07_Docker_Prosthemous/prometheus-2.45.4.windows-amd64
 
 # extra data
 *.gz
