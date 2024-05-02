@@ -4,14 +4,15 @@ services:
   app:
     build:
       context: ./app
-    #   dockerfile: Dockerfile
-    # volumes:
-    #   - .:/app
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
     restart: unless-stopped
     container_name: app_sahilll
     ports:
       - 8000:8000
-    command: uvicorn --host=0.0.0.0 main:app 
+    # command: uvicorn --host=0.0.0.0 app.main:app --port=8000
+    command: uvicorn app.main:app --host=0.0.0.0 --port=8000
     networks:
       example-network:
         ipv4_address: 172.16.238.10
