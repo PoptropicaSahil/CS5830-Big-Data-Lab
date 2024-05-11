@@ -45,7 +45,7 @@ Instrumentator().instrument(app).expose(app)
 
 @app.get("/")
 def home():
-    return "Hii Hellooooo to the Assignment Limaoooo 😍😎😍"
+    return "Hii Hellooo Welcome to the Assignment by Sahil 😎😎😎"
 
 def predict_digit(model: Sequential, data_point: list) -> str:
     data_point = np.array(data_point).reshape(1, 784)
