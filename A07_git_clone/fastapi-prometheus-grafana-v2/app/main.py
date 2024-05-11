@@ -33,7 +33,7 @@ request_counter = Counter("api_requests_total", "Total API requests", ["client_i
 
 # Gauges for monitoring API runtime and processing time per character
 api_runtime_gauge = Gauge("api_runtime_seconds", "API runtime in seconds")
-processing_time_per_char_gauge = Gauge("processing_time_per_char_microseconds", "Processing time per character in microseconds", ["client_ip"])
+processing_time_per_char_gauge = Gauge("processing_time_per_char_microseconds_SODA", "Processing time per character in microseconds", ["client_ip"])
 
 
 # Function to get client IP
@@ -45,7 +45,7 @@ Instrumentator().instrument(app).expose(app)
 
 @app.get("/")
 def home():
-    return "Hii Hellooooo to the Assignment Nihar😍😎😍"
+    return "Hii Hellooooo to the Assignment Limaoooo 😍😎😍"
 
 def predict_digit(model: Sequential, data_point: list) -> str:
     data_point = np.array(data_point).reshape(1, 784)
