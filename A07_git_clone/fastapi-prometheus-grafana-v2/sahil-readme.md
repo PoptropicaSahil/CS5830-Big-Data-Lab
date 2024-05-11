@@ -89,4 +89,25 @@ $ docker compose # for subsequent runs, building is not necessary so this works 
 
 
 
-# Prometheus and Grafana Snapshots
+# Snapshots
+
+## FastAPI
+<img src="readme_images/fastapi-1.png" width="1000"/>
+<img src="readme_images/fastapi-2.png" width="1000"/>
+
+
+## Prometheus
+> Note: These are the custom metrics and gauges as required `api_requests_total`, `api_runtime_seconds`,`processing_time_per_char_microseconds_SODA`
+> Added SODA for fun xD
+
+<img src="readme_images/prom-1.png" width="1000"/>
+<img src="readme_images/prom-2.png" width="1000"/>
+<img src="readme_images/prom-3.png" width="1000"/>
+
+## Grafana
+<img src="readme_images/graf-1.png" width="1000"/>
+<img src="readme_images/graf-2.png" width="1000"/>
+
+
+**Default Dashboard**
+<img src="readme_images/graf-3.png" width="1000"/>

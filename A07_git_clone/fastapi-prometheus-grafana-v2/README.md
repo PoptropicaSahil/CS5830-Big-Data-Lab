@@ -20,7 +20,7 @@ git clone https://github.com/Kludex/fastapi-prometheus-grafana
 You'll need to run the docker containers:
 
 ``` bash
-docker-compose up
+$ docker-compose up
 ```
 
 Now you have access to those three containers and their respective ports:
