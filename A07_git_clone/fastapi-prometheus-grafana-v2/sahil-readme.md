@@ -1,7 +1,6 @@
-https://github.com/docker/compose/issues/11168#issuecomment-1800362132
-
-install pyyml first then docker-compose
 # Assignment on Docker, Prometheus and Grafana
+
+*Note*: It is highly recommended to use a virtual environment for running the code. Requirements are given in the `./app/requirements.txt` file
 
 ## Easy Direct Usage
 
@@ -18,6 +17,7 @@ The three containers and their respective ports are given at:
 
 > The main code is the `main.py` file
 > Since the keras model is kept in the `./app` directory, the path to the keras model in the Swagger UI should be written as: `./mnist-model.keras`
+
 
 
 # Task-wise pointers:
@@ -44,12 +44,12 @@ project/
 - I downlaoded the offical Prometheus and Grafana softwares from their respective websites and placed them in the root project directory (haven't included it in GitHub )
 - Ran the main field simply by `python -m app.main`
 
-- Starting Prometheus:
+**Starting Prometheus**:
 > - Download Prometheus from `https://prometheus.io/download/`, extract it 
 > - Copy the `config/prometheus.yml` file from my project to the Prometheus directory
 > - Run the following command : `./prometheus --config.file=prometheus.yml`
 
-- Starting Grafana :
+**Starting Grafana** :
 > - Download Prometheus from `https://grafana.com/grafana/download`, extract it 
 > - Copy the `config/grafana` directory from my project to the Prometheus directory
 > - Run the following command : `./bin/grafana-server --homepath=./config/grafana`
@@ -66,15 +66,27 @@ project/
 
 
 
+## TASK 2
 
-<!-- when only the app without docker -->
-./mnist-model.keras
+### Setting up Docker
+- Wrote the DockerFile, docker-compose file, other yml files properly and setup the containers using
+```bash
+$ docker compose up --build # for the first time
+# OR
+$ docker compose # for subsequent runs, building is not necessary so this works fine
+```
+- Port mapping is taken care of by the docker-compose file, and the respective yml files for grafana and prometheus. As mentined above, the three containers and their respective ports are given at:
+    * FastAPI: http://localhost:8000/
+    * Prometheus: http://localhost:9090/
+    * Grafana: http://localhost:3000/
+- Setting up CPU utilsation is done by adding the `cpus` option in the compose file. We set it to 1. The image below shows how only 1 cpu is utlised
 
-<!-- 1 CPUs -->
-![alt text](readme_images/one-cpu.png)
+<img src="readme_images/one-cpu-better.png" width="1000"/>
 
-![alt text](readme_images/one-cpu-better.png)
+- Spinning up more instances of the container:
+    - So far, āll tries have resulted in port mapping issues
+    - Tried using the `docker compose scale` command; assigned different ports the app run like `ports: - 8000-8003:80` in the compose file; duplicated the apps container part of the compose file and manually assigned different ports, but still could not connect it to the Prometheus and subsequently Grafana endpoints :( 
 
 
-<!-- try on other device -->
-![alt text](readme_images/from-phone.jpg)
+
+# Prometheus and Grafana Snapshots
