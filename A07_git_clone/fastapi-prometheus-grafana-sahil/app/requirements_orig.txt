@@ -1,5 +1,0 @@
-prometheus-fastapi-instrumentator
-uvicorn
-fastapi
-tensorflow
-pillow
