@@ -7,7 +7,10 @@ scrape_configs:
     metrics_path: /prometheus/metrics
     static_configs:
       - targets: ['localhost:9090']
+      # - targets: ['localhost:9092']
   - job_name: 'app'
     scrape_interval: 5s
     static_configs:
       - targets: ['app:8000']
+      # - targets: ['app:8000', 'app_1:8000', 'app_2:8000']
+

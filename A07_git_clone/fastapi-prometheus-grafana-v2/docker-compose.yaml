@@ -1,13 +1,16 @@
 version: "3.9"
 
 services:
-  app_soda:
+  app:
     build:
       context: ./app
     restart: unless-stopped
-    container_name: app
+    # container_name: app_sahil_soda
     ports:
       - 8000:8000
+      # - 8010:8010
+      # - 8080-8081:80
+    cpus: 1
     networks:
       example-network:
         ipv4_address: 172.16.238.10
@@ -15,9 +18,10 @@ services:
   prometheus:
     image: prom/prometheus:latest
     restart: unless-stopped
-    container_name: prometheus
+    # container_name: prometheus_soda
     ports:
       - 9090:9090
+      # - 9092:9092
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
@@ -26,12 +30,13 @@ services:
 
   grafana:
     image: grafana/grafana
-    container_name: grafana
+    # container_name: grafana_soda
     restart: unless-stopped
     depends_on:
       - prometheus
     ports:
       - 3000:3000
+      # - 3010:3010
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
     env_file:

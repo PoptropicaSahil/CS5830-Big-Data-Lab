@@ -17,6 +17,7 @@ datasources:
     orgId: 1
     # <string> url
     url: http://prometheus:9090
+    # url: http://prometheus:9092
     # <string> database password, if used
     password:
     # <string> database user, if used

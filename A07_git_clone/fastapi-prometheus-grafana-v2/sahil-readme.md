@@ -10,3 +10,8 @@ install pyyml first then docker-compose
 
 <!-- when only the app without docker -->
 ./mnist-model.keras
+
+<!-- 1 CPUs -->
+![alt text](readme_images/one-cpu.png)
+
+![alt text](readme_images/one-cpu-better.png)
