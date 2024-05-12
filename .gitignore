@@ -14,6 +14,9 @@ venv
 A07_Docker_Prosthemous/grafana-enterprise-10.4.2.windows-amd64
 A07_Docker_Prosthemous/prometheus-2.45.4.windows-amd64
 
+A07_FastAPI_Prosthemous_download/grafana-enterprise-10.4.2.windows-amd64
+A07_FastAPI_Prosthemous_download/prometheus-2.45.4.windows-amd64
+
 # extra data
 *.gz
 *.pyc
