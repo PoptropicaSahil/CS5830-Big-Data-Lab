@@ -18,8 +18,7 @@ docker-compose up
 docker-compose up
 ```
 
-The three containers and their respective ports are given at:
-* FastAPI: http://localhost:8000/
+
 The three containers and their respective ports are given at:
 * FastAPI: http://localhost:8000/
 * Prometheus: http://localhost:9090/
@@ -167,6 +166,7 @@ The following changes are made (also stated in the compose file and the promethe
 # 📸Snapshots📸
 
 ## ⏩FastAPI⏩
+<img src="readme_images/fastapi-1.png" width="1000"/>
 <img src="readme_images/fastapi-2.png" width="1000"/>
 
 
