@@ -2,9 +2,6 @@
 
 *Note*: It is highly recommended to use a virtual environment for running the code. Requirements are given in the `./app/requirements.txt` file
 
-## ✅Easy Direct Usage✅
-
-Simply run the following command
 # Assignment on Docker, Prometheus and Grafana
 
 *Note*: It is highly recommended to use a virtual environment for running the code. Requirements are given in the `./app/requirements.txt` file
@@ -14,8 +11,7 @@ Simply run the following command
 Simply run the following command
 
 ``` bash
-docker-compose up
-docker-compose up
+docker compose up
 ```
 
 
