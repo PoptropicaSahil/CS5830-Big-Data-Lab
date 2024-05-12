@@ -5,11 +5,21 @@
 ## ✅Easy Direct Usage✅
 
 Simply run the following command
+# Assignment on Docker, Prometheus and Grafana
+
+*Note*: It is highly recommended to use a virtual environment for running the code. Requirements are given in the `./app/requirements.txt` file
+
+## ✅Easy Direct Usage✅
+
+Simply run the following command
 
 ``` bash
 docker-compose up
+docker-compose up
 ```
 
+The three containers and their respective ports are given at:
+* FastAPI: http://localhost:8000/
 The three containers and their respective ports are given at:
 * FastAPI: http://localhost:8000/
 * Prometheus: http://localhost:9090/
