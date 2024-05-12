@@ -182,6 +182,8 @@ The following changes are made (also stated in the compose file and the promethe
 <img src="readme_images/graf-1.png" width="1000"/>
 <img src="readme_images/graf-2.png" width="1000"/>
 
+**Dashboard for multiple instances**
+<img src="readme_images/graf-multiple-instances.png" width="1000"/>
 
 **Default Dashboard**
 <img src="readme_images/graf-3.png" width="1000"/>
