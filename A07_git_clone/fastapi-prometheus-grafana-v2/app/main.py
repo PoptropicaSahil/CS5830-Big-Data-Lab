@@ -25,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load the model
+# Load the model, initialise to None
 model = None
 
 # Counters for tracking API usage from different client IP addresses
@@ -43,16 +43,19 @@ def get_client_ip():
 # Instrument your FastAPI application
 Instrumentator().instrument(app).expose(app)
 
+# Root endpoint
 @app.get("/")
 def home():
     return "Hii Hellooo Welcome to the Assignment by Sahil 😎😎😎"
 
+# Predict digit function from last assignment
 def predict_digit(model: Sequential, data_point: list) -> str:
     data_point = np.array(data_point).reshape(1, 784)
     prediction = model.predict(data_point)
     digit = str(np.argmax(prediction))
     return digit
 
+# Format image function from last assignment
 def format_image(file: UploadFile):
     image = Image.open(file.file)
     image = image.convert('L')
@@ -61,6 +64,8 @@ def format_image(file: UploadFile):
     return data_point
 
 # Middleware to track request counts and runtime
+# Note the usage of our custom Gauges and Counters
+# This http endpoint is required by Prometheus to scrape metrics
 @app.middleware("http")
 async def monitor_requests(request: Request, call_next):
     start_time = time.time()
@@ -71,6 +76,8 @@ async def monitor_requests(request: Request, call_next):
     request_counter.labels(client_ip=get_client_ip()).inc()
     return response
 
+
+# Predict endpoint to make predictions an update the metrics and gauges
 @app.post('/predict')
 async def predict(file: UploadFile = File(...)):
     start_time = time.time()
@@ -86,6 +93,9 @@ async def predict(file: UploadFile = File(...)):
     else:
         return {"error": "Model not loaded. Please provide the model path."}
 
+
+# Loading the model with a boundary validation check 
+# for the presence of the model
 @app.get("/load_model")
 def load_model(model_path: str = Query(..., description="Path to the saved MNIST model")):
     global model
@@ -95,6 +105,7 @@ def load_model(model_path: str = Query(..., description="Path to the saved MNIST
     except ValueError:
         return {"error": "Keras model not found at the given path"}
 
+# Metrics endpoint for prometheus that returns a Response variable
 @app.get("/metrics")
 async def get_metrics():
     return Response(content_type="text/plain", content=generate_latest())
