@@ -1,3 +1,25 @@
+###############################
+# PROMETHEUS FILE FOR ONE INSTANCE
+###############################
+
+# global:
+#   scrape_interval: 15s
+
+# scrape_configs:
+#   - job_name: 'prometheus'
+#     scrape_interval: 15s
+#     metrics_path: /prometheus/metrics
+#     static_configs:
+#       - targets: ['localhost:9090']
+  # - job_name: 'app'
+  #   scrape_interval: 5s
+  #   static_configs:
+  #     - targets: ['app:8000']
+
+
+###############################
+# PROMETHEUS FILE FOR MULTIPLE INSTANCES
+###############################
 global:
   scrape_interval: 15s
 
@@ -7,10 +29,18 @@ scrape_configs:
     metrics_path: /prometheus/metrics
     static_configs:
       - targets: ['localhost:9090']
-      # - targets: ['localhost:9092']
+
   - job_name: 'app'
     scrape_interval: 5s
     static_configs:
-      - targets: ['app:8000']
-      # - targets: ['app:8000', 'app_1:8000', 'app_2:8000']
+      - targets: ['app:8000']  # As earlier
 
+  - job_name: 'app2'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['app2:8000']  # New configuration for app2 instance
+
+  - job_name: 'app3'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['app3:8000']  # New configuration for app3 instance
