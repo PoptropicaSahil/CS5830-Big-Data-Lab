@@ -1,0 +1,92 @@
+version: "3.9"
+
+services:
+  ##############################
+  # APP SERVICE FOR ONE INSTANCE
+  ##############################
+  app:
+    build:
+      context: ./app
+    restart: unless-stopped
+    # container_name: app_sahil_soda
+    ports:
+      - 8000:8000
+    cpus: 1
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.10
+
+
+  ##############################
+  # APP SERVICE FOR MULTIPLE INSTANCES
+  ##############################
+  # app:
+  #   build:
+  #     context: ./app
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8000:8000
+  #   cpus: 1
+  #   networks:
+  #     example-network:
+  #       ipv4_address: 172.16.238.10
+
+  # app2:
+  #   build:
+  #     context: ./app
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8001:8000
+  #   cpus: 1
+  #   networks:
+  #     example-network:
+  #       ipv4_address: 172.16.238.20
+
+  # app3:
+  #   build:
+  #     context: ./app
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8002:8000
+  #   cpus: 1
+  #   networks:
+  #     example-network:
+  #       ipv4_address: 172.16.238.30
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    # container_name: prometheus_soda
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.11
+
+  grafana:
+    image: grafana/grafana
+    # container_name: grafana_soda
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.12
+
+networks:
+  example-network:
+    name: example-network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24

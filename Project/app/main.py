@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from prometheus_client import Counter, Gauge, generate_latest, start_http_server
 from prometheus_fastapi_instrumentator import Instrumentator
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from utils.logging_config import script_run_logger
 
 app = FastAPI()
@@ -47,13 +47,13 @@ Instrumentator().instrument(app).expose(app)
 @app.get("/")
 def home():
     script_run_logger.info("started app and ran main page msg")
-    return "Hii Welcome to the final Project by Team Story 📖"
+    return "Hii Welcome to the final Project by Team Story 📖📖"
 
 
 def load_model():
     global model
     try:
-        model = pickle.load(open("./app/model.pkl", "rb"))
+        model = pickle.load(open("model.pkl", "rb"))
         return {"message": "Model loaded successfully"}
     except ValueError:
         return {
@@ -62,24 +62,6 @@ def load_model():
 
 
 def format_data(file: UploadFile):
-    # Save the uploaded file to a temporary directory
-    # temp_file_path = os.path.join(os.getcwd(), file.filename)
-
-    # script_run_logger.info(f"tmp file path is {temp_file_path}")
-
-    # with open(temp_file_path, "wb") as temp_file:
-    #     temp_file.write(await file.read())
-
-    # script_run_logger.info("Created tmp file")
-
-    # # Now you can read the saved file
-    # data = pd.read_csv(temp_file_path, index_col=0)  # type: ignore
-    # data = data.drop(["risk"], axis=1)
-
-    # script_run_logger.info(f"data is {data}")
-
-    # # Clean up the temporary file
-    # os.remove(temp_file_path)
 
     data = pd.read_csv(file.file, index_col=0)  # type: ignore
     data = data.drop(["risk"], axis=1)
@@ -89,25 +71,7 @@ def format_data(file: UploadFile):
     return data
 
 
-# @app.post("/upload")
-# def upload_file(file: UploadFile = File(...)):
-#     df = pd.read_csv(file.file)
-#     file.file.close()
-#     return {"filename": file.filename}
-
-
 def predict_risk(model, data):
-
-    # NOTE THAT I AM READING THE SAME FILE, THE LOGGER BELOW ALSO PRINTS THE EXPECTED DATA ONLY
-    # data = pd.read_csv("./trial_data/sample.csv", index_col=0)
-    # drop target col
-    # data = data.drop(["risk"], axis=1)
-    # print(data.columns)
-    # script_run_logger.info(type(data))
-
-    #############################
-    # script_run_logger.info(f"predict risk function data is {data}")
-
     predictions = model.predict(data)  # type: ignore
     script_run_logger.info(f"predictions are {predictions}")
 
@@ -115,7 +79,6 @@ def predict_risk(model, data):
 
 
 # Middleware to track request counts and runtime
-# Note the usage of our custom Gauges and Counters
 # This http endpoint is required by Prometheus to scrape metrics
 @app.middleware("http")
 async def monitor_requests(request: Request, call_next):
@@ -149,37 +112,12 @@ async def predict(file: UploadFile = File(...)):
         return {"error": "Model not loaded. Please provide the model path."}
 
 
-# Loading the model with a boundary validation check
-# for the presence of the model
-# @app.get("/load_model")
-# def load_model(
-#     model_path: str = Query(..., description="Path to the saved MNIST model"),
-# ):
-#     global model
-#     try:
-#         model = pickle.load(open("./app/model.pkl", "rb"))
-#         return {"message": "Model loaded successfully"}
-#     except ValueError:
-#         return {"error": "Keras model not found at the given path"}
-
 
 # Metrics endpoint for prometheus that returns a Response variable
 @app.get("/metrics")
 async def get_metrics():
     return Response(content_type="text/plain", content=generate_latest())  # type: ignore
 
-
-# def og_function():
-#     data = pd.read_csv("./trial_data/sample.csv", index_col=0)
-
-#     # drop target col
-#     data = data.drop(["risk"], axis=1)
-#     # print(data.columns)
-
-#     predictions = model.predict(data)
-
-#     print(predictions)
-#     return
 
 # Start Prometheus metrics server
 start_http_server(9090)

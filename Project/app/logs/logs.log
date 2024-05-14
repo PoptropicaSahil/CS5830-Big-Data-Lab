@@ -1,0 +1,12 @@
+2024-05-14 11:15:34,380 - SCRIPT RUNNER - INFO - started app and ran main page msg
+2024-05-14 11:16:01,603 - SCRIPT RUNNER - INFO - loaded model and formatted data
+2024-05-14 11:16:01,603 - SCRIPT RUNNER - INFO - model type is <class 'sklearn.ensemble._forest.RandomForestClassifier'> and data type is <class 'pandas.core.frame.DataFrame'>
+2024-05-14 11:16:01,680 - SCRIPT RUNNER - INFO - data is    age  job  credit_amount  duration  purpose_car  ...  check_rich  age_cat_senior  age_cat_young  cred_amt_low  cred_amt_medium
+0   67    2           1169         6        False  ...       False            True          False          True            False
+1   22    2           5951        48        False  ...       False           False           True         False             True
+2   49    1           2096        12        False  ...       False           False          False          True            False
+3   45    2           7882        42        False  ...       False           False          False         False             True
+4   53    2           4870        24         True  ...       False           False          False          True            False
+
+[5 rows x 23 columns]
+2024-05-14 11:16:01,711 - SCRIPT RUNNER - INFO - predictions are [0 1 0 0 1]
