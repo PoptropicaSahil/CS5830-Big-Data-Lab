@@ -1,0 +1,6 @@
+,age,job,credit_amount,duration,risk,purpose_car,purpose_domestic appliances,purpose_education,purpose_furniture/equipment,purpose_radio/TV,purpose_repairs,purpose_vacation/others,sex_male,housing_own,housing_rent,savings_moderate,savings_quite rich,savings_rich,check_moderate,check_rich,age_cat_senior,age_cat_young,cred_amt_low,cred_amt_medium
+0,67,2,1169,6,0,False,False,False,False,True,False,False,True,True,False,False,False,False,False,False,True,False,True,False
+1,22,2,5951,48,1,False,False,False,False,True,False,False,False,True,False,False,False,False,True,False,False,True,False,True
+2,49,1,2096,12,0,False,False,True,False,False,False,False,True,True,False,False,False,False,False,False,False,False,True,False
+3,45,2,7882,42,0,False,False,False,True,False,False,False,True,False,False,False,False,False,False,False,False,False,False,True
+4,53,2,4870,24,1,True,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False
