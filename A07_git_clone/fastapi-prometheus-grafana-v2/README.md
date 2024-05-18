@@ -64,8 +64,8 @@ project/
 - All the required gauges and counters are added to the `main.py` file with corresponding logic
 
 ### 📱Testing via other devices📱
-- Opened the command prompt from Windows and ran `ipconfig`. Under the Wireless LAN adapter Wi-Fi, I got my IPv4 Address as `192.168.10.105`
-- From another device connected to the same network, I typed the url : `http://192.168.10.105:8000.`
+- Opened the command prompt from Windows and ran `ipconfig`. Under the Wireless LAN adapter Wi-Fi, I got my IPv4 Address as `192.168.0.3`
+- From another device connected to the same network, I typed the url : `http://192.168.0.3`
 - Could acccess and test my API with this endpoint
 <img src="readme_images/from-phone.jpg" width="500"/>
 
